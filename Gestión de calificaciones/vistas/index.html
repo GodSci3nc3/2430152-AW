@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Gestión de calificaciones</h1>
+
+    <div id="paso1">
+        <h3>¿Cuántos estudiantes vas a registrar?</h3>
+        <input type="number" id="cantidadEstudiantes" min="1" required>
+        <button onclick="crearFormularios()">Crear formularios</button>
+    </div>
+
+    <div id="paso2">
+        <div id="formularios"></div>
+        <button onclick="guardarTodos()">Guardar todos</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Calificación</th>
+            </tr>
+        </thead>
+        <tbody>
+            Aún no hay estudiantes aquí.
+        </tbody>
+    </table>
+
+    <div id="promedio">
+        <h3>Promedio de la clase: <span>-</span></h3>
+    </div>
+</body>
+</html>
+
+<script>
+    function crearFormularios() {
+        var cantidad = document.getElementById('cantidadEstudiantes').value;
+        var contenedor = document.getElementById('formularios');
+        contenedor.innerHTML = '';
+        
+        for(var i = 0; i < cantidad; i++) {
+            contenedor.innerHTML += `
+                <div class="estudiante">
+                    <h4>Estudiante ${i + 1}</h4>
+                    <label>Nombre:</label>
+                    <input type="text" class="nombre" required><br><br>
+                    <label>Calificación:</label>
+                    <input type="number" class="calificacion" min="0" max="100" required><br><br>
+                </div>
+            `;
+        }
+        
+        document.getElementById('paso1').style.display = 'none';
+        document.getElementById('paso2').style.display = 'block';
+    }
+
+    function guardarTodos() {
+        var estudiantes = document.getElementsByClassName('estudiante');
+        var datos = [];
+        
+        for(var i = 0; i < estudiantes.length; i++) {
+            var nombre = estudiantes[i].querySelector('.nombre').value;
+            var calificacion = estudiantes[i].querySelector('.calificacion').value;
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/guardar', false);  
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send('nombre=' + nombre + '&calificacion=' + calificacion);
+        }
+
+        document.getElementById('paso2').style.display = 'none';
+        document.querySelector('table').style.display = 'table';
+        document.getElementById('promedio').style.display = 'block';
+        
+        cargarEstudiantes();
+        actualizarPromedio();
+    }
+
+    /* Carga la tabla */
+    function cargarEstudiantes() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/estudiantes', true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var estudiantes = JSON.parse(xhr.responseText);
+                var tbody = document.querySelector('table tbody');
+                tbody.innerHTML = '';
+                
+                for(var i = 0; i < estudiantes.length; i++) {
+                    var fila = '<tr>' +
+                        '<td>' + estudiantes[i].nombre + '</td>' +
+                        '<td>' + estudiantes[i].calificacion + '</td>' +
+                    '</tr>';
+                    tbody.innerHTML += fila;
+                }
+            }
+        };
+        xhr.send();
+    }
+
+
+    window.onload = function() {
+        cargarEstudiantes();
+        actualizarPromedio();
+    }
+</script>
