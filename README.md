@@ -8,3 +8,9 @@ En este repositorio se estarán trabajando las prácticas y trabajos generales d
 
 # Estructura
 Las prácticas sencillas solo son un archivo, pero las que tienen recursos y estructura propia cuentan con un directorio propio.
+
+
+# Prácticas
+
+### Caso 1 - Diseño en figma
+https://www.figma.com/design/QnNdrwZtlWu7zdqKVzZ9Aq/Cafeter%C3%ADa-UPV?node-id=0-1&p=f&t=4zVvTj607NTFxbIg-0
