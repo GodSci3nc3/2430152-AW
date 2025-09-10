@@ -3,32 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sushi Restaurant</title>
-    <link href="indexStyles.css" rel="stylesheet">
+    <title>Cafeteria UPV</title>
+    <link rel="icon" type="image/png" href="/resources/logoV1.png">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="indexStyles.css">
 </head>
 <body>
-    <nav>
+    <div class="sidebar">
+        <a href="#inicio" class="sidebar-btn">
+            <span class="material-symbols-outlined">home</span>
+        </a>
+        <a href="#menu" class="sidebar-btn">
+            <span class="material-symbols-outlined">restaurant_menu</span>
+        </a>
+        <a href="#contacto" class="sidebar-btn">
+            <span class="material-symbols-outlined">info</span>
+        </a>
+    </div>
+
+    <nav class="navbar">
+        <a class="navbar-logo"><img src="/resources/logoV2.png" alt="Logo UPV" class="logo-img"></a>
         <ul>
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#menu">Menú</a></li>
-            <li><a href="#horarios">Horarios</a></li>
             <li><a href="#contacto">Contacto</a></li>
         </ul>
     </nav>
 
     <section id="inicio" class="hero">
-        <h1>Welcome to <span class="highlight">Sushi</span> Restaurant</h1>
-        <p>People eat with their eyes and Sushi creates an easy way for customers to order when they can see beautiful photos of your food</p>
+        <h1>Bienvenido <span class="highlight">Cafeteria</span> UPV</h1>
+        <p>Donde los estudiantes pueden descansar y comer en un ambiente reconfortante después y entre clases</p>
         <div class="hero-buttons">
-            <a href="#menu" class="btn">Menu</a>
             <a href="#contacto" class="btn">Contacto</a>
+            <a href="#menu" class="btn">Menu</a>
         </div>
     </section>
 
+<section id="menu" class="menu-section">
+  <div class="menu-content">
+    <h2 class="menu-title">Menú</h2>
 
+    <div class="menu-grid">
+      <!-- Tarjeta 1 (ancha) -->
+      <article class="card span-7" style="--img:url('/resources/menuImagen1.png')">
+        <div class="card__media" aria-hidden="true"></div>
+        <div class="card__body">
+          <h3>Gorditas</h3>
+          <p>Rellenas al gusto. Calientitas, recién hechas.</p>
+          <a class="card__cta" href="#pedido">Pedir</a>
+        </div>
+      </article>
+
+      <!-- Tarjeta 2 (mediana) -->
+      <article class="card span-5" style="--img:url('/resources/menuImage2.png')">
+        <div class="card__media" aria-hidden="true"></div>
+        <div class="card__body">
+          <h3>Café</h3>
+          <p>Americano, latte, capuchino. Descuento con credencial.</p>
+          <a class="card__cta" href="#pedido">Pedir</a>
+        </div>
+      </article>
+
+      <!-- Tarjeta 3 (full-bleed) -->
+      <article class="card span-12 tall" style="--img:url('/resources/menuImage3.png')">
+        <div class="card__media" aria-hidden="true"></div>
+        <div class="card__body">
+          <h3>Flautas</h3>
+          <p>De pollo o frijol, doraditas y crujientes.</p>
+          <a class="card__cta" href="#pedido">Pedir</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+    <div class="content-wrapper" id="contacto">
+        <h1 class="main-title">Sobre Nosotros</h1>
+        <div class="main-content">
+            <div class="map-section">
+                <h2 class="section-title">Ubicación</h2>
+                <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2724.7609448626663!2d-99.0779196585693!3d23.72910379780082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1757470078047!5m2!1ses-419!2smx" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="about-info">
+                <div class="info-row">
+                    <span class="material-symbols-outlined">schedule</span>
+                    <p class="info-text"><strong>Horario</strong><br>Lun - Vie<br>7:00 AM - 3:00 PM</p>
+                </div>
+                <div class="info-row">
+                    <span class="material-symbols-outlined">call</span>
+                    <p class="info-text"><strong>Teléfono</strong><br>123-456-7890</p>
+                </div>
+                <div class="info-row">
+                    <span class="material-symbols-outlined">email</span>
+                    <p class="info-text"><strong>Email</strong><br>info@upv.mx</p>
+                </div>
+                <div class="info-row">
+                    <span class="material-symbols-outlined">location_on</span>
+                    <p class="info-text"><strong>Dirección</strong><br>Cd. Victoria, Tamps.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer>
-
+        <p>&copy; 2025 Cafetería UPV. Todos los derechos reservados.</p>
     </footer>
 </body>
 </html>
