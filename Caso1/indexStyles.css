@@ -76,14 +76,10 @@
         }
 
         .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 150px;
-            background:linear-gradient(to bottom, rgba(255,255,255,0) 30%, #ffffff 100%);
-            pointer-events: none;
+            content:""; position:absolute; inset:0;
+            background:#fff;
+            clip-path: polygon(0 75%, 25% 80%, 50% 78%, 75% 82%, 100% 76%, 100% 100%, 0 100%);
+            opacity:.9;
         }
 
         .hero h1 {
@@ -271,7 +267,8 @@
         .menu-content{ padding:1.25rem .8rem; }
         .card h3{ font-size:1.5rem; }
         }
-        /* Content Wrapper */
+
+        
         .content-wrapper { 
             width: 100%;
             max-width: 1200px;
