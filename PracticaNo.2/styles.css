@@ -73,3 +73,32 @@ h2 {
     margin: 35px 0 20px 0;
     padding-left: 0;
 }
+/* ===== TABLA ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 22px 0;
+    background: #f4f7fb;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(60,80,120,0.07);
+}
+
+th, td {
+    padding: 10px 12px;
+    text-align: left;
+}
+
+th {
+    background: #e3e7ee;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+tr {
+    border-bottom: 1px solid #dbe2ea;
+}
+
+tr:last-child {
+    border-bottom: none;
+}
