@@ -1,0 +1,56 @@
+/* ===== ESTILOS BÁSICOS GENERALES ===== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fafafa;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    font-size: 16px;
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+/* ===== TÍTULOS Y ENCABEZADOS ===== */
+
+h1 {
+    color: #2c3e50;
+    font-size: 2.5em;
+    font-weight: 300;
+    margin: 40px 0 30px 0;
+    text-align: center;
+    position: relative;
+    letter-spacing: 1px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 2px;
+}
+
+h2 {
+    color: #34495e;
+    font-size: 1.8em;
+    font-weight: 400;
+    margin: 35px 0 20px 0;
+    padding-left: 0;
+}
