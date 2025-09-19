@@ -5,6 +5,25 @@
     padding: 0;
     box-sizing: border-box;
 }
+/* ===== FRAGMENTOS DE CÓDIGO ===== */
+code, pre code {
+    background: #e3e7ee;
+    color: #222;
+    border-radius: 7px;
+    padding: 2px 6px;
+    font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+    font-size: 0.98em;
+    box-shadow: 0 1px 4px rgba(60,80,120,0.07);
+}
+
+pre {
+    background: #dde3ec;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 18px 0;
+    overflow-x: auto;
+    box-shadow: 0 2px 8px rgba(60,80,120,0.09);
+}
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
