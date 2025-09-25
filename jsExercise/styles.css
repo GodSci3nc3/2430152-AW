@@ -1,0 +1,53 @@
+/* Solo layout básico sin colores ni efectos */
+body {
+    text-align: center;
+    background-color: #faf8f5;
+}
+
+.container {
+    display: inline-block;
+    text-align: left;
+}
+
+.main-content {
+    display: flex;
+    justify-content: center;
+}
+
+.form-section {
+    width: 400px;
+    margin-right: 30px;
+    border: 1px solid black;
+    padding: 15px;
+}
+
+.lista-section {
+    flex: 1;
+}
+
+.campo {
+    margin-bottom: 10px;
+}
+
+.campo label {
+    display: block;
+}
+
+.campo input, .campo select {
+    width: 100%;
+}
+
+.botones {
+    margin-top: 15px;
+}
+
+.paginacion {
+    text-align: center;
+    margin: 10px 0;
+}
+
+#tablaAlumnos {
+    font-size: 12px;
+    width: 100%;
+    min-height: 300px;
+}
