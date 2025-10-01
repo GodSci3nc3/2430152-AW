@@ -57,6 +57,36 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = 'dashboard.html';
         });
     }
+    
+    const formLogin = document.querySelector('#loginForm form');
+    if (formLogin) {
+        formLogin.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                console.log('Por favor completa todos los campos');
+                return;
+            }
+            
+            const usuarioGuardado = localStorage.getItem('usuarioActual');
+            if (usuarioGuardado) {
+                const usuario = JSON.parse(usuarioGuardado);
+                
+                if (usuario.email === email && usuario.password === password) {
+                    console.log('Login exitoso');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    console.log('Email o contraseña incorrectos');
+                }
+            } else {
+                console.log('No hay usuarios registrados');
+            }
+        });
+    }
+    
     const usuarioGuardado = localStorage.getItem('usuarioActual');
     if (usuarioGuardado) {
         const usuario = JSON.parse(usuarioGuardado);
