@@ -1,6 +1,8 @@
 // Esperamos que la página cargue completamente
 document.addEventListener('DOMContentLoaded', function() {
     
+    let usuarios = [];
+    
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
     const showRegisterLink = document.getElementById('showRegister');
@@ -20,6 +22,48 @@ document.addEventListener('DOMContentLoaded', function() {
             registerForm.classList.add('hidden');
             loginForm.classList.remove('hidden');
         });
+    }
+    
+    const formRegistro = document.querySelector('#registerForm form');
+    if (formRegistro) {
+        formRegistro.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (!nombre || !email || !password || !confirmPassword) {
+                console.log('Por favor completa todos los campos');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                console.log('Las contraseñas no coinciden');
+                return;
+            }
+            
+            const nuevoUsuario = {
+                nombre: nombre,
+                email: email,
+                password: password
+            };
+            
+            usuarios.push(nuevoUsuario);
+            localStorage.setItem('usuarioActual', JSON.stringify(nuevoUsuario));
+            
+            console.log('Usuario registrado exitosamente:', nuevoUsuario);
+            window.location.href = 'dashboard.html';
+        });
+    }
+    const usuarioGuardado = localStorage.getItem('usuarioActual');
+    if (usuarioGuardado) {
+        const usuario = JSON.parse(usuarioGuardado);
+        const welcomeTitle = document.querySelector('.welcome-title');
+        if (welcomeTitle) {
+            welcomeTitle.textContent = `¡Bienvenido, ${usuario.nombre}!`;
+        }
     }
     
 });
