@@ -1,0 +1,30 @@
+/* =================================
+   ESTILOS DEL DASHBOARD
+   Específicos para la página principal
+   ================================= */
+
+.welcome-container {
+    text-align: center;
+}
+
+.welcome-title {
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: 48px;
+    margin-bottom: 1rem;
+}
+
+.welcome-subtitle {
+    color: var(--color-text-light);
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 2rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    text-decoration: none;
+    width: auto; 
+}
+
+
