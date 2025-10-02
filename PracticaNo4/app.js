@@ -87,13 +87,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    const usuarioGuardado = localStorage.getItem('usuarioActual');
-    if (usuarioGuardado) {
-        const usuario = JSON.parse(usuarioGuardado);
-        const welcomeTitle = document.querySelector('.welcome-title');
-        if (welcomeTitle) {
-            welcomeTitle.textContent = `¡Bienvenido, ${usuario.nombre}!`;
+    // Proteger el dashboard
+    const welcomeTitle = document.querySelector('.welcome-title');
+    if (welcomeTitle) {
+        const usuarioGuardado = localStorage.getItem('usuarioActual');
+        if (!usuarioGuardado) {
+            console.log('No hay sesión activa, redirigiendo al login');
+            window.location.href = 'auth.html';
+            return;
         }
+        
+        const usuario = JSON.parse(usuarioGuardado);
+        welcomeTitle.textContent = `¡Bienvenido, ${usuario.nombre}!`;
+        console.log('Usuario loggeado correctamente:', usuario.nombre);
+    }
+    
+    // Botón de cerrar sesión
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            localStorage.removeItem('usuarioActual');
+            console.log('Sesión cerrada, localStorage limpiado');
+            
+            window.location.href = 'auth.html';
+        });
     }
     
 });
