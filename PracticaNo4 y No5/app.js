@@ -1,7 +1,19 @@
 // Esperamos que la página cargue completamente
 document.addEventListener('DOMContentLoaded', function() {
     
+    // ====================
+    // MANEJO DE USUARIOS
+    // ====================
+    
+    // Array para guardar todos los usuarios registrados
     let usuarios = [];
+    
+    // Cargar usuarios guardados del localStorage al inicio
+    const usuariosGuardados = localStorage.getItem('usuariosRegistrados');
+    if (usuariosGuardados) {
+        usuarios = JSON.parse(usuariosGuardados);
+        console.log('Usuarios cargados del localStorage:', usuarios.length);
+    }
     
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
@@ -50,7 +62,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 password: password
             };
             
+            // Agregar al array y guardar en localStorage
             usuarios.push(nuevoUsuario);
+            guardarUsuarios();
+            
+            // Guardar como usuario actual (sesión activa)
             localStorage.setItem('usuarioActual', JSON.stringify(nuevoUsuario));
             
             console.log('Usuario registrado exitosamente:', nuevoUsuario);
@@ -71,20 +87,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            const usuarioGuardado = localStorage.getItem('usuarioActual');
-            if (usuarioGuardado) {
-                const usuario = JSON.parse(usuarioGuardado);
-                
-                if (usuario.email === email && usuario.password === password) {
-                    console.log('Login exitoso');
-                    window.location.href = 'dashboard.html';
-                } else {
-                    console.log('Email o contraseña incorrectos');
+            // Buscar el usuario en todos los usuarios registrados
+            let usuarioEncontrado = null;
+            for (let i = 0; i < usuarios.length; i++) {
+                if (usuarios[i].email === email && usuarios[i].password === password) {
+                    usuarioEncontrado = usuarios[i];
+                    break;
                 }
+            }
+            
+            if (usuarioEncontrado) {
+                // Guardar como usuario actual (sesión activa)
+                localStorage.setItem('usuarioActual', JSON.stringify(usuarioEncontrado));
+                console.log('Login exitoso');
+                window.location.href = 'dashboard.html';
             } else {
-                console.log('No hay usuarios registrados');
+                console.log('Email o contraseña incorrectos');
             }
         });
+    }
+    
+    // Función para guardar usuarios en localStorage
+    function guardarUsuarios() {
+        localStorage.setItem('usuariosRegistrados', JSON.stringify(usuarios));
+        console.log('Usuarios guardados en localStorage');
     }
     
     // Proteger el dashboard
@@ -102,7 +128,79 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Usuario loggeado correctamente:', usuario.nombre);
     }
     
-    // Botón de cerrar sesión
+
+    let tareas = [];
+    
+    const tareasGuardadas = localStorage.getItem('tareasGuardadas');
+    if (tareasGuardadas) {
+        tareas = JSON.parse(tareasGuardadas);
+        console.log('Tareas cargadas del localStorage:', tareas.length);
+    }
+    
+    const addTaskBtn = document.getElementById('addTaskBtn');
+    const taskNameInput = document.getElementById('taskName');
+    const taskDescriptionInput = document.getElementById('taskDescription');
+    const tasksTableBody = document.getElementById('tasksTableBody');
+    
+    if (addTaskBtn) {
+        addTaskBtn.addEventListener('click', function() {
+            
+            const nombreTarea = taskNameInput.value;
+            const descripcionTarea = taskDescriptionInput.value;
+            
+            if (nombreTarea === '' || descripcionTarea === '') {
+                console.log('Por favor completa ambos campos');
+                return;
+            }
+            
+            const nuevaTarea = {
+                nombre: nombreTarea,
+                descripcion: descripcionTarea
+            };
+            
+            tareas.push(nuevaTarea);
+            console.log('Nueva tarea agregada:', nuevaTarea);
+            console.log('Total de tareas:', tareas.length);
+            
+            guardarTareas();
+            
+            mostrarTareas();
+            
+            taskNameInput.value = '';
+            taskDescriptionInput.value = '';
+        });
+    }
+    
+    function guardarTareas() {
+        localStorage.setItem('tareasGuardadas', JSON.stringify(tareas));
+        console.log('Tareas guardadas en localStorage');
+    }
+    
+    if (tasksTableBody) {
+        mostrarTareas();
+    }
+    
+    function mostrarTareas() {
+        tasksTableBody.innerHTML = '';
+        
+        if (tareas.length === 0) {
+            tasksTableBody.innerHTML = '<tr><td class="text-muted text-center" colspan="2">No hay tareas agregadas aún</td></tr>';
+            return;
+        }
+        
+        for (let i = 0; i < tareas.length; i++) {
+            const tarea = tareas[i];
+            
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td>${tarea.nombre}</td>
+                <td>${tarea.descripcion}</td>
+            `;
+            
+            tasksTableBody.appendChild(fila);
+        }
+    }
+    
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', function(e) {
