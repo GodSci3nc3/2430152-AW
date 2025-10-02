@@ -3,28 +3,99 @@
    Específicos para la página principal
    ================================= */
 
+/* Contenedor de bienvenida */
 .welcome-container {
     text-align: center;
+    animation: moveToTop 2s ease-in-out 1s forwards;
 }
 
+/* Título principal con animación */
 .welcome-title {
     color: var(--color-text);
     font-weight: 600;
-    font-size: 48px;
+    font-size: clamp(2rem, 8vw, 3rem);
     margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
 }
 
-.welcome-subtitle {
-    color: var(--color-text-light);
-    font-weight: 500;
-    font-size: 18px;
-    margin-bottom: 2rem;
+/* Animación de aparición */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-.btn-primary {
-    display: inline-block;
+/* Animación de movimiento hacia arriba */
+@keyframes moveToTop {
+    from {
+        transform: translateY(0) scale(1);
+    }
+    to {
+        transform: translateY(-35vh) scale(0.67);
+    }
+}
+
+/* Botón de logout en esquina */
+.logout-btn {
+    position: fixed;
+    top: 2vh;
+    right: 2vw;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--border-radius);
     text-decoration: none;
-    width: auto; 
+    font-weight: 600;
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
+    transition: var(--transition);
+    opacity: 0;
+    animation: fadeInBtn 1s ease-in-out 3s forwards;
 }
 
+.logout-btn:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-2px);
+    color: var(--color-white);
+    text-decoration: none;
+}
 
+/* Animación del botón */
+@keyframes fadeInBtn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive específico del dashboard */
+@media (max-width: 768px) {
+    .welcome-title {
+        font-size: 36px;
+    }
+    
+    .logout-btn {
+        top: 15px;
+        right: 15px;
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+    
+    @keyframes moveToTop {
+        from {
+            transform: translateY(0) scale(1);
+        }
+        to {
+            transform: translateY(-250px) scale(0.67);
+        }
+    }
+}

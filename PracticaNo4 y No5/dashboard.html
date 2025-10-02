@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+<body>
+    <div class="container-fluid vh-100 d-flex align-items-center justify-content-center">
+        <div class="welcome-container">
+            <h1 class="welcome-title">¡Bienvenido!</h1>
+            
+            <div class="tasks-container">
+                <div class="add-task-form">
+                    <div class="row align-items-end">
+                        <div class="col-md-4">
+                            <label for="taskName" class="form-label">Nombre de la tarea</label>
+                            <input type="text" class="form-control" id="taskName" placeholder="Ingrese el nombre">
+                        </div>
+                        <div class="col-md-5">
+                            <label for="taskDescription" class="form-label">Descripción</label>
+                            <input type="text" class="form-control" id="taskDescription" placeholder="Ingrese la descripción">
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-primary w-100" id="addTaskBtn">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nombre de la Tarea</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tasksTableBody">
+                            <tr>
+                                <td class="text-muted text-center" colspan="2">No hay tareas agregadas aún</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <a href="#" id="logoutBtn" class="logout-btn">Cerrar Sesión</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+</body>
+</html>
