@@ -1,6 +1,6 @@
 .welcome-container {
     text-align: center;
-    animation: moveToTop 2s ease-in-out 1s forwards;
+    animation: moveToTop 1s ease-in-out 0.5s forwards;
 }
 
 .welcome-title {
@@ -9,7 +9,7 @@
     font-size: clamp(2rem, 8vw, 3rem);
     margin-bottom: 1rem;
     opacity: 0;
-    animation: fadeIn 1s ease-in-out forwards;
+    animation: fadeIn 0.6s ease-in-out forwards;
 }
 
 @keyframes fadeIn {
@@ -45,7 +45,7 @@
     font-size: clamp(0.75rem, 2vw, 0.875rem);
     transition: var(--transition);
     opacity: 0;
-    animation: fadeInBtn 1s ease-in-out 3s forwards;
+    animation: fadeInBtn 0.6s ease-in-out 1.2s forwards;
 }
 
 .logout-btn:hover {
@@ -71,7 +71,7 @@
     max-width: 900px;
     width: 100%;
     opacity: 0;
-    animation: fadeInTasks 1s ease-in-out 3s forwards;
+    animation: fadeInTasks 0.6s ease-in-out 1.2s forwards;
 }
 
 .add-task-form {
