@@ -131,29 +131,42 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const proyectosGuardados = localStorage.getItem('proyectosGuardados');
         if (proyectosGuardados) {
-            proyectos = JSON.parse(proyectosGuardados);
+            const todosLosProyectos = JSON.parse(proyectosGuardados);
+            proyectos = todosLosProyectos.filter(p => p.creadoPor === usuario.nombre);
         }
-        
+
         if (proyectos.length === 0) {
             proyectos.push({
                 id: 'PROJ-001',
                 nombre: 'Sin nombre',
-                indice: 0
+                indice: 0,
+                creadoPor: usuario.nombre
             });
             guardarProyectos();
         }
-        
+
         const tareasGuardadas = localStorage.getItem('tareasGuardadas');
         if (tareasGuardadas) {
-            tareas = JSON.parse(tareasGuardadas);
+            const todasLasTareas = JSON.parse(tareasGuardadas);
+            tareas = todasLasTareas.filter(t => t.asignadoA === usuario.nombre);
+        }        function guardarProyectos() {
+            const proyectosExistentes = localStorage.getItem('proyectosGuardados');
+            let todosLosProyectos = proyectosExistentes ? JSON.parse(proyectosExistentes) : [];
+            
+            todosLosProyectos = todosLosProyectos.filter(p => p.creadoPor !== usuario.nombre);
+            todosLosProyectos = todosLosProyectos.concat(proyectos);
+            
+            localStorage.setItem('proyectosGuardados', JSON.stringify(todosLosProyectos));
         }
-        
-        function guardarProyectos() {
-            localStorage.setItem('proyectosGuardados', JSON.stringify(proyectos));
-        }
-        
+
         function guardarTareas() {
-            localStorage.setItem('tareasGuardadas', JSON.stringify(tareas));
+            const tareasExistentes = localStorage.getItem('tareasGuardadas');
+            let todasLasTareas = tareasExistentes ? JSON.parse(tareasExistentes) : [];
+            
+            todasLasTareas = todasLasTareas.filter(t => t.asignadoA !== usuario.nombre);
+            todasLasTareas = todasLasTareas.concat(tareas);
+            
+            localStorage.setItem('tareasGuardadas', JSON.stringify(todasLasTareas));
         }
         
         const createProjectBtn = document.getElementById('createProjectBtn');
@@ -163,7 +176,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const nuevoProyecto = {
                     id: nuevoId,
                     nombre: 'Nuevo Proyecto',
-                    indice: proyectos.length
+                    indice: proyectos.length,
+                    creadoPor: usuario.nombre
                 };
                 
                 proyectos.push(nuevoProyecto);
@@ -243,6 +257,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 const projectNameElement = filaProyecto.querySelector('.project-name');
                 projectNameElement.textContent = proyecto.nombre;
                 projectNameElement.setAttribute('data-project-id', proyecto.id);
+                
+                const deleteProjectBtn = filaProyecto.querySelector('.project-delete');
+                deleteProjectBtn.onclick = function() {
+                    eliminarProyecto(proyecto.id);
+                };
                 
                 filaProyecto.addEventListener('dragstart', dragStartProject);
                 filaProyecto.addEventListener('dragover', dragOver);
@@ -416,6 +435,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 tareas.splice(indiceGlobal, 1);
                 guardarTareas();
                 mostrarTodo();
+            }
+        };
+
+        window.eliminarProyecto = function(proyectoId) {
+            const indice = proyectos.findIndex(p => p.id === proyectoId);
+            if (indice !== -1) {
+                proyectos.splice(indice, 1);
+                tareas = tareas.filter(t => t.proyectoId !== proyectoId);
+                
+                guardarProyectos();
+                guardarTareas();
+                mostrarTodo();
+                cargarProyectosEnDropdown();
             }
         };
         
