@@ -229,27 +229,26 @@ document.addEventListener('DOMContentLoaded', function() {
             tbody.innerHTML = '';
             
             if (proyectos.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted p-4">No hay proyectos creados</td></tr>';
+                const emptyTemplate = document.getElementById('emptyStateTemplate');
+                const emptyRow = emptyTemplate.content.cloneNode(true);
+                tbody.appendChild(emptyRow);
                 return;
             }
             
             for (let i = 0; i < proyectos.length; i++) {
                 const proyecto = proyectos[i];
                 
-                // Crear fila de proyecto usando template
                 const projectTemplate = document.getElementById('projectRowTemplate');
                 const filaProyecto = projectTemplate.content.cloneNode(true).querySelector('tr');
                 const projectNameElement = filaProyecto.querySelector('.project-name');
                 projectNameElement.textContent = proyecto.nombre;
                 projectNameElement.setAttribute('data-project-id', proyecto.id);
                 
-                // Configurar eventos de drag & drop para proyecto
                 filaProyecto.addEventListener('dragstart', dragStartProject);
                 filaProyecto.addEventListener('dragover', dragOver);
                 filaProyecto.addEventListener('drop', dropProject);
                 filaProyecto.addEventListener('dragend', dragEnd);
                 
-                // Configurar edición de nombre de proyecto
                 projectNameElement.addEventListener('blur', function() {
                     const projectId = this.getAttribute('data-project-id');
                     const nuevoNombre = this.textContent.trim();
@@ -270,11 +269,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 for (let j = 0; j < tareasDelProyecto.length; j++) {
                     const tarea = tareasDelProyecto[j];
                     
-                    // Crear fila de tarea usando template
                     const taskTemplate = document.getElementById('taskRowTemplate');
                     const filaTarea = taskTemplate.content.cloneNode(true).querySelector('tr');
                     
-                    // Llenar datos de la tarea
                     filaTarea.querySelector('.task-title').textContent = tarea.titulo;
                     filaTarea.querySelector('.task-description').textContent = tarea.descripcion;
                     filaTarea.querySelector('.task-status').textContent = tarea.estado;
@@ -283,13 +280,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     filaTarea.querySelector('.task-priority').className = `badge ${obtenerColorPrioridad(tarea.prioridad)}`;
                     filaTarea.querySelector('.task-date').textContent = tarea.fechaVencimiento || '-';
                     
-                    // Configurar botón de eliminar
                     const deleteBtn = filaTarea.querySelector('.task-delete');
                     deleteBtn.onclick = function() {
                         eliminarTarea(proyecto.id, j);
                     };
                     
-                    // Configurar eventos de drag & drop para tarea
                     filaTarea.addEventListener('dragstart', dragStartTask);
                     filaTarea.addEventListener('dragover', dragOver);
                     filaTarea.addEventListener('drop', dropTask);
