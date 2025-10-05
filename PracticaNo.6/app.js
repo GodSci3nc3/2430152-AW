@@ -236,22 +236,21 @@ document.addEventListener('DOMContentLoaded', function() {
             for (let i = 0; i < proyectos.length; i++) {
                 const proyecto = proyectos[i];
                 
-                const filaProyecto = document.createElement('tr');
-                filaProyecto.className = 'table-secondary project-header';
-                filaProyecto.innerHTML = `
-                    <td colspan="6">
-                        <strong contenteditable="true" data-project-id="${proyecto.id}">${proyecto.nombre}</strong>
-                    </td>
-                `;
+                // Crear fila de proyecto usando template
+                const projectTemplate = document.getElementById('projectRowTemplate');
+                const filaProyecto = projectTemplate.content.cloneNode(true).querySelector('tr');
+                const projectNameElement = filaProyecto.querySelector('.project-name');
+                projectNameElement.textContent = proyecto.nombre;
+                projectNameElement.setAttribute('data-project-id', proyecto.id);
                 
-                filaProyecto.draggable = true;
+                // Configurar eventos de drag & drop para proyecto
                 filaProyecto.addEventListener('dragstart', dragStartProject);
                 filaProyecto.addEventListener('dragover', dragOver);
                 filaProyecto.addEventListener('drop', dropProject);
                 filaProyecto.addEventListener('dragend', dragEnd);
                 
-                const editableElement = filaProyecto.querySelector('[contenteditable]');
-                editableElement.addEventListener('blur', function() {
+                // Configurar edición de nombre de proyecto
+                projectNameElement.addEventListener('blur', function() {
                     const projectId = this.getAttribute('data-project-id');
                     const nuevoNombre = this.textContent.trim();
                     
@@ -271,22 +270,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 for (let j = 0; j < tareasDelProyecto.length; j++) {
                     const tarea = tareasDelProyecto[j];
                     
-                    const filaTarea = document.createElement('tr');
-                    filaTarea.className = 'task-row';
-                    filaTarea.innerHTML = `
-                        <td>${tarea.titulo}</td>
-                        <td>${tarea.descripcion}</td>
-                        <td><span class="badge ${obtenerColorEstado(tarea.estado)}">${tarea.estado}</span></td>
-                        <td><span class="badge ${obtenerColorPrioridad(tarea.prioridad)}">${tarea.prioridad}</span></td>
-                        <td>${tarea.fechaVencimiento || '-'}</td>
-                        <td>
-                            <button class="btn btn-sm btn-outline-danger" onclick="eliminarTarea('${proyecto.id}', ${j})">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    `;
+                    // Crear fila de tarea usando template
+                    const taskTemplate = document.getElementById('taskRowTemplate');
+                    const filaTarea = taskTemplate.content.cloneNode(true).querySelector('tr');
                     
-                    filaTarea.draggable = true;
+                    // Llenar datos de la tarea
+                    filaTarea.querySelector('.task-title').textContent = tarea.titulo;
+                    filaTarea.querySelector('.task-description').textContent = tarea.descripcion;
+                    filaTarea.querySelector('.task-status').textContent = tarea.estado;
+                    filaTarea.querySelector('.task-status').className = `badge ${obtenerColorEstado(tarea.estado)}`;
+                    filaTarea.querySelector('.task-priority').textContent = tarea.prioridad;
+                    filaTarea.querySelector('.task-priority').className = `badge ${obtenerColorPrioridad(tarea.prioridad)}`;
+                    filaTarea.querySelector('.task-date').textContent = tarea.fechaVencimiento || '-';
+                    
+                    // Configurar botón de eliminar
+                    const deleteBtn = filaTarea.querySelector('.task-delete');
+                    deleteBtn.onclick = function() {
+                        eliminarTarea(proyecto.id, j);
+                    };
+                    
+                    // Configurar eventos de drag & drop para tarea
                     filaTarea.addEventListener('dragstart', dragStartTask);
                     filaTarea.addEventListener('dragover', dragOver);
                     filaTarea.addEventListener('drop', dropTask);
