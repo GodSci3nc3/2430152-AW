@@ -1,0 +1,233 @@
+.welcome-container {
+    text-align: center;
+    animation: moveToTop 1s ease-in-out 0.5s forwards;
+}
+
+.welcome-title {
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: clamp(2rem, 8vw, 3rem);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes moveToTop {
+    from {
+        transform: translateY(0) scale(1);
+    }
+    to {
+        transform: translateY(-40%) scale(0.75);
+    }
+}
+
+.logout-btn {
+    position: fixed;
+    top: 2vh;
+    right: 2vw;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
+    transition: var(--transition);
+    opacity: 0;
+    animation: fadeInBtn 0.6s ease-in-out 1.2s forwards;
+}
+
+.logout-btn:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-2px);
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+@keyframes fadeInBtn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tasks-container {
+    margin-top: 3rem;
+    max-width: 900px;
+    width: 100%;
+    opacity: 0;
+    animation: fadeInTasks 0.6s ease-in-out 1.2s forwards;
+}
+
+.add-task-form {
+    background-color: var(--color-white);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.add-task-form .form-label {
+    color: var(--color-text);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.add-task-form .form-control {
+    border: 2px solid var(--color-light);
+    border-radius: var(--border-radius);
+    padding: 0.75rem;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.add-task-form .form-control:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25);
+}
+
+.table-container {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background-color: var(--color-light);
+    color: var(--color-text);
+    font-weight: 600;
+    border: none;
+    padding: 1rem;
+}
+
+.table tbody td {
+    padding: 1rem;
+    border-color: var(--color-light);
+    vertical-align: middle;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > td {
+    background-color: rgba(248, 249, 250, 0.5);
+}
+
+@keyframes fadeInTasks {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =================================
+   ESTILOS DE PROYECTOS
+   ================================= */
+
+/* Contenedor de proyectos */
+.projects-container {
+    margin-top: 2rem;
+    max-width: 900px;
+    width: 100%;
+    opacity: 0;
+    animation: fadeInTasks 0.6s ease-in-out 1.2s forwards;
+}
+
+/* Formulario de crear proyecto */
+.add-project-form {
+    background-color: var(--color-white);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #28a745;
+}
+
+.add-project-form h5 {
+    color: #28a745;
+    font-weight: 600;
+}
+
+/* Lista de proyectos */
+.projects-list {
+    background-color: var(--color-white);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.projects-list h6 {
+    color: var(--color-text);
+    margin-bottom: 1rem;
+}
+
+/* =================================
+   ESTILOS DRAG AND DROP
+   ================================= */
+
+/* Efecto visual cuando se está arrastrando una fila */
+.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+    transition: all 0.2s ease;
+    background-color: #e3f2fd !important;
+    border: 2px dashed #2196f3 !important;
+}
+
+/* Efecto en las filas de la tabla para indicar que son arrastrables */
+.table tbody tr {
+    cursor: move;
+    transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Indicador visual para drag and drop */
+.table tbody tr::before {
+    content: '⋮⋮';
+    position: absolute;
+    left: 0.5rem;
+    color: #6c757d;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.table tbody tr:hover::before {
+    opacity: 0.7;
+}
+
+/* Contenedor de tabla con posición relativa para el indicador */
+.table {
+    position: relative;
+}
+
+.table tbody td:first-child {
+    padding-left: 2rem;
+}
