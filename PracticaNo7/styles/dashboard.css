@@ -1,9 +1,29 @@
 
-.main-content {
-    max-width: 900px;
+.dashboard-layout {
+    display: flex;
+    gap: 2rem;
+    max-width: 1200px;
     width: 100%;
     margin: 0 auto;
     padding: 0 1rem;
+}
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.notes-sidebar {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+.notes-sidebar-title {
+    color: var(--color-text);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
 }
 
 .welcome-title {
@@ -184,31 +204,25 @@
     margin-bottom: 0.25rem;
 }
 
-/* Estilos para las notas post-it */
 .notes-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1000;
+    position: relative;
+    min-height: 400px;
 }
 
 .note-item {
-    position: absolute;
-    width: 200px;
-    min-height: 150px;
+    position: relative;
+    width: 100%;
+    min-height: 120px;
     background-color: #f8f9fa;
     border: 1px solid #e5e5e5;
     border-radius: var(--border-radius);
     padding: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     cursor: pointer;
-    pointer-events: auto;
-    transform: rotate(-2deg);
+    transform: rotate(-1deg);
     transition: all 0.3s ease;
     font-family: 'Inter', sans-serif;
+    margin-bottom: 15px;
 }
 
 .note-item:nth-child(even) {
@@ -218,14 +232,14 @@
 }
 
 .note-item:nth-child(3n) {
-    transform: rotate(-1deg);
+    transform: rotate(-0.5deg);
     background-color: #f1f3f4;
     border-color: #ced4da;
 }
 
 .note-item:hover {
-    transform: rotate(0deg) scale(1.05);
-    z-index: 1001;
+    transform: rotate(0deg) scale(1.02);
+    z-index: 10;
 }
 
 .note-title {

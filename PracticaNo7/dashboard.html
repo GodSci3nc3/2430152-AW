@@ -12,85 +12,89 @@
 </head>
 <body>
     <div class="container-fluid py-4">
-        <div class="main-content">
-            <h1 class="welcome-title">¡Bienvenido!</h1>
+        <div class="dashboard-layout">
+            <div class="main-content">
+                <h1 class="welcome-title">¡Bienvenido!</h1>
+                
+                <button type="button" class="btn btn-outline-warning mb-3" id="createNoteBtn">
+                    <i class="fas fa-sticky-note me-2"></i>Crear Nota
+                </button>
             
-            <button type="button" class="btn btn-outline-warning mb-3" id="createNoteBtn">
-                <i class="fas fa-sticky-note me-2"></i>Crear Nota
-            </button>
-            
-            <div class="task-form">
-                <h6>Agregar Tarea</h6>
-                <div class="row g-2 mb-3">
-                    <div class="col-md-3">
-                        <label for="titulo" class="form-label">Título</label>
-                        <input type="text" class="form-control form-control-sm" id="titulo" placeholder="Título">
+                <div class="task-form">
+                    <h6>Agregar Tarea</h6>
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-3">
+                            <label for="titulo" class="form-label">Título</label>
+                            <input type="text" class="form-control form-control-sm" id="titulo" placeholder="Título">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="descripcion" class="form-label">Descripción</label>
+                            <input type="text" class="form-control form-control-sm" id="descripcion" placeholder="Descripción">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="tareaProyecto" class="form-label">Proyecto</label>
+                            <select class="form-select form-select-sm" id="tareaProyecto">
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="estado" class="form-label">Estado</label>
+                            <select class="form-select form-select-sm" id="estado">
+                                <option value="pendiente">Pendiente</option>
+                                <option value="en_proceso">En Proceso</option>
+                                <option value="hecha">Hecha</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="prioridad" class="form-label">Prioridad</label>
+                            <select class="form-select form-select-sm" id="prioridad">
+                                <option value="baja">Baja</option>
+                                <option value="media">Media</option>
+                                <option value="alta">Alta</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <input type="text" class="form-control form-control-sm" id="descripcion" placeholder="Descripción">
-                    </div>
-                    <div class="col-md-2">
-                        <label for="tareaProyecto" class="form-label">Proyecto</label>
-                        <select class="form-select form-select-sm" id="tareaProyecto">
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="estado" class="form-label">Estado</label>
-                        <select class="form-select form-select-sm" id="estado">
-                            <option value="pendiente">Pendiente</option>
-                            <option value="en_proceso">En Proceso</option>
-                            <option value="hecha">Hecha</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="prioridad" class="form-label">Prioridad</label>
-                        <select class="form-select form-select-sm" id="prioridad">
-                            <option value="baja">Baja</option>
-                            <option value="media">Media</option>
-                            <option value="alta">Alta</option>
-                        </select>
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-3">
+                            <label for="fechaVencimiento" class="form-label">Vencimiento</label>
+                            <input type="week" class="form-control form-control-sm" id="fechaVencimiento">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">&nbsp;</label>
+                            <button type="button" class="btn btn-dark btn-sm d-block" id="addTaskBtn">Agregar Tarea</button>
+                        </div>
                     </div>
                 </div>
-                <div class="row g-2 mb-3">
-                    <div class="col-md-3">
-                        <label for="fechaVencimiento" class="form-label">Vencimiento</label>
-                        <input type="week" class="form-control form-control-sm" id="fechaVencimiento">
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">&nbsp;</label>
-                        <button type="button" class="btn btn-dark btn-sm d-block" id="addTaskBtn">Agregar Tarea</button>
-                    </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th width="25%">Título</th>
+                                <th width="30%">Descripción</th>
+                                <th width="15%">Estado</th>
+                                <th width="15%">Prioridad</th>
+                                <th width="10%">Vencimiento</th>
+                                <th width="5%">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mainTableBody">
+                            <tr>
+                                <td colspan="6" class="text-center text-muted p-4">No hay proyectos creados</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+                
+                <button type="button" class="btn btn-outline-secondary mt-2 w-100" id="createProjectBtn">
+                    <i class="fas fa-plus me-2"></i>Crear Proyecto
+                </button>
             </div>
             
-            <div class="table-responsive">
-                <table class="table table-sm">
-                    <thead>
-                        <tr>
-                            <th width="25%">Título</th>
-                            <th width="30%">Descripción</th>
-                            <th width="15%">Estado</th>
-                            <th width="15%">Prioridad</th>
-                            <th width="10%">Vencimiento</th>
-                            <th width="5%">Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody id="mainTableBody">
-                        <tr>
-                            <td colspan="6" class="text-center text-muted p-4">No hay proyectos creados</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="notes-sidebar">
+                <h6 class="notes-sidebar-title">Notas</h6>
+                <div id="notesContainer" class="notes-container"></div>
             </div>
-            
-            <button type="button" class="btn btn-outline-secondary mt-2 w-100" id="createProjectBtn">
-                <i class="fas fa-plus me-2"></i>Crear Proyecto
-            </button>
         </div>
-        
-        <!-- Contenedor para las notas post-it -->
-        <div id="notesContainer" class="notes-container"></div>
         
         <a href="#" id="logoutBtn" class="logout-btn">Cerrar Sesión</a>
     </div>

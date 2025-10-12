@@ -178,8 +178,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 const noteDiv = document.createElement('div');
                 noteDiv.className = 'note-item';
-                noteDiv.style.top = nota.posY + 'px';
-                noteDiv.style.left = nota.posX + 'px';
                 
                 const titleInput = document.createElement('input');
                 titleInput.type = 'text';
@@ -217,19 +215,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const createNoteBtn = document.getElementById('createNoteBtn');
         if (createNoteBtn) {
             createNoteBtn.addEventListener('click', function() {
-                const posicionesUsadas = [];
-                for (let i = 0; i < notas.length; i++) {
-                    posicionesUsadas.push({ x: notas[i].posX, y: notas[i].posY });
-                }
-                
-                let posX = 50 + (notas.length * 30) % 400;
-                let posY = 150 + (notas.length * 40) % 300;
-                
                 const nuevaNota = {
                     titulo: 'Sin nombre',
                     contenido: 'Sin descripción',
-                    posX: posX,
-                    posY: posY,
                     creadoPor: usuario.nombre
                 };
                 
