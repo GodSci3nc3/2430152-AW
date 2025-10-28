@@ -3,5 +3,5 @@
 	url = https://github.com/GodSci3nc3/CalculadoraCalificaciones
 
 [submodule "examenRapidoJS"]
-	path = PracticaNo8
+	path = examenRapidoJS
 	url = https://github.com/GodSci3nc3/examenRapidoJS
