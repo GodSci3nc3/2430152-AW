@@ -47,6 +47,8 @@ body {
 }
 
 .practice-card {
+    background: transparent;
+    border: none;
     border-radius: var(--border-radius);
     padding: 1.5rem 1rem;
     text-align: center;
@@ -56,12 +58,23 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    transition: var(--transition);
+}
+
+.practice-card:hover {
+    transform: translateY(-2px);
 }
 
 .practice-icon {
     font-size: 3rem;
     color: var(--color-primary);
     margin-bottom: 1rem;
+    transition: var(--transition);
+}
+
+.practice-card:hover .practice-icon {
+    color: var(--color-primary-hover);
+    transform: scale(1.1);
 }
 
 .practice-name {
