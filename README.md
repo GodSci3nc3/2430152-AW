@@ -2,42 +2,20 @@
 
 Repositorio universitario para prácticas de desarrollo web con HTML, CSS, JavaScript y Node.js.
 
-## Estructura del Proyecto
-
-```
-AW/
-├── Caso1/                    # Diseño UI/UX con Figma
-├── PracticaNo2/              # HTML y CSS básico
-├── PracticaNo3/              # JavaScript DOM
-├── PracticaNo4/              # CSS Grid y Flexbox
-├── PracticaNo5/              # Formularios y validación
-├── PracticaNo6/              # Diseño responsivo
-├── PracticaNo7/              # APIs y fetch
-├── PracticaNo8/              # Calculadora (repositorio externo)
-├── PracticaNo9/              # Sistema de autenticación
-├── examenRapidoJS/           # Examen JavaScript
-├── Gestión de calificaciones/ # Node.js y Express
-├── manejoArchivosClase/      # File system en Node.js
-└── PracticaFinalU2/          # Proyecto final (repositorio externo)
-```
-
 ## Tecnologías Utilizadas
 
-- **Frontend**: HTML5, CSS3, JavaScript ES6+
-- **Backend**: Node.js, Express.js
-- **Estilos**: Bootstrap, CSS Grid, Flexbox
-- **Herramientas**: Figma, Git
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![Node.js](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
 
-## Repositorios Relacionados
+## Repositorios Embebidos
 
 - [PracticaFinalU2](https://github.com/GodSci3nc3/PracticaFinalU2) - Proyecto final de la unidad 2
 - [CalculadoraCalificaciones](https://github.com/GodSci3nc3/CalculadoraCalificaciones) - Calculadora para gestión de calificaciones
-
-## Configuración
-
-1. Clonar el repositorio
-2. Abrir `index.html` en el navegador para navegar entre prácticas
-3. Para proyectos con Node.js, ejecutar `npm install` en el directorio correspondiente
 
 ## Licencia
 
