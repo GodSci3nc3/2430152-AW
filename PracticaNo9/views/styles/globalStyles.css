@@ -81,3 +81,20 @@ body {
     background-color: var(--color-white);
     outline: none;
 }
+
+.systemResponse .disabled {
+    opacity: 0;
+}
+
+.systemResponse .active {
+    opacity: 1;
+    animation: errorShake 0.5s ease-in-out;
+
+}
+
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(-2px) translateY(0); }
+    50% { transform: translateX(-4px) translateY(0); }
+    75% { transform: translateX(4px) translateY(0); }
+}
