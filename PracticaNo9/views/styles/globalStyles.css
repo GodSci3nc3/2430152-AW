@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #faf8f5;
+    background-color: var(--color-background);
     min-height: 100vh;
     font-weight: 500;
 }
@@ -38,6 +38,19 @@ body {
     font-size: 25px;
 }
 
+.text-primary-subtitle {
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 22px;
+}
+
+.text-primary-p {
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 18px;
+    
+}
+
 .btn-primary {
     background-color: var(--color-primary);
     border: none;
@@ -55,7 +68,24 @@ body {
 .btn-primary:hover {
     background-color: var(--color-primary-hover);
     transform: translateY(-1px);
-    color: white;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    transition: var(--transition);
+    width: 100%;
+    cursor: pointer;
+    color: var(--color-primary-hover);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-3px);
 }
 
 .form-label {
