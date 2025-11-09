@@ -24,11 +24,15 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 
+    <script src=" https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js "></script>
+
 
     <title>Dashboard | Medicore System</title>
 </head>
 <body>
     <div class="container-fluid p-5">
+        <div class="row">
+        <div class="col">
         <h1 class="text-primary-title">Agenda de hoy</h1>
         <hr>
 
@@ -53,6 +57,21 @@
                 <div class="info">María Gonzalez - Consulta general</div>
             </div>
         </div>
+        </div>
+
+        <div class="col">
+            <h1 class="text-primary-title">Agenda de la semana</h1>
+            <hr>
+
+            <div id="agenda">
+
+            </div>
+        </div>
+
+        </div>
+
     </div>
+
+    <script src="../../js/dashboard_doctor.js"></script>
 </body>
 </html>

@@ -3,6 +3,22 @@
     height: 600px;
 }
 
+:root {
+    --fc-border-color: var(--color-border);
+    --fc-button-bg-color: var(--color-primary);
+    --fc-button-border-color: var(--color-primary);
+    --fc-button-hover-bg-color: var(--color-primary-hover);
+    --fc-today-bg-color: var(--color-background-secondary);
+    --fc-neutral-text-color: var(--color-text);
+    --fc-list-event-hover-bg-color: var(--color-background-secondary);
+
+}
+
+.fc-col-header-cell-cushion {
+    color: var(--color-text);
+}
+
+
 .welcome-screen {
     position: fixed;
     top: 0;
@@ -36,6 +52,7 @@
     border-left: 4px solid var(--color-primary);
     margin-left: 50px;
     padding-left: 30px;
+    min-height: 600px;
 }
 
 .appointment-item {
