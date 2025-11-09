@@ -1,5 +1,15 @@
-  const linesGraph = document.getElementById('monthIncomes');
-  const barGraph = document.getElementById('topSpecialty');
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      const welcomeScreen = document.getElementById('welcome-message');
+      const mainContent = document.getElementById('main-content');
+      
+      welcomeScreen.classList.add('move-up');
+      
+      setTimeout(function() {
+        mainContent.classList.add('show');
+        
+    const linesGraph = document.getElementById('monthIncomes');
+    const barGraph = document.getElementById('topSpecialty');
 
   //Ingresos mensuales
 new Chart(linesGraph, {
@@ -18,6 +28,10 @@ new Chart(linesGraph, {
   options: {
     responsive: true,
     maintainAspectRatio: false,
+    animation: {
+      duration: 1500,
+      easing: 'easeOutQuart'
+    },
     plugins: {
       title: {
           display: true,
@@ -61,7 +75,7 @@ new Chart(linesGraph, {
   }
 });
 
-// Ingresos por especialidad: Para saber a dónde destinar recursos, qué especialidad aporta más, etc.
+// Ingresos por especialidad: Esto para saber a dónde destinar recursos, qué especialidad aporta más, etc.
 new Chart(barGraph, {
   type: 'bar',
   data: {
@@ -75,8 +89,10 @@ new Chart(barGraph, {
     }]
   },
   options: {
-    responsive: true,
-    maintainAspectRatio: false,
+    animation: {
+      duration: 1500,
+      easing: 'easeOutBounce'
+    },
     plugins: {
       title: {
         text: 'Ingresos por especialidad',
@@ -119,4 +135,9 @@ new Chart(barGraph, {
     }
   }
 });
+
+
+      }, 300);
+    }, 600);
+  });
 

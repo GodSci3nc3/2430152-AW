@@ -2,3 +2,32 @@
     position:relative;
     height: 600px;
 }
+
+.welcome-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: all 0.8s ease;
+}
+
+.welcome-screen.move-up {
+    height: 80px;
+    align-items: center;
+}
+
+#main-content {
+    opacity: 0;
+    margin-top: 80px;
+    transition: opacity 0.8s ease;
+}
+
+#main-content.show {
+    opacity: 1;
+}

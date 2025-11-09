@@ -13,8 +13,8 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     } else {
 
         (email === 'admin@admin.com' && password === 'admin') 
-        ? window.location.href = 'dashboard.html' 
-        : (response.textContent = 'Parece que ese usuario no existe. Prueba creando una cuenta.', response.classList.add('active'));
+        ? window.location.href = 'admin/dashboard_admin.html' 
+        : (response.textContent = 'Parece que ese usuario no existe. Comunícate con director de área para llevar registro de tu cuenta.', response.classList.add('active'));
 
     }
 
