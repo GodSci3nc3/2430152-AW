@@ -31,3 +31,39 @@
 #main-content.show {
     opacity: 1;
 }
+
+.timeline {
+    border-left: 4px solid var(--color-primary);
+    margin-left: 50px;
+    padding-left: 30px;
+}
+
+.appointment-item {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.appointment-item::before {
+    content: '';
+    position: absolute;
+    left: -37px;
+    top: 20px;
+    width: 12px;
+    height: 12px;
+    background: var(--color-primary-hover);
+    border-radius: 50%;
+}
+
+.hour {
+    position: absolute;
+    left: -80px;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+.info {
+    background: white;
+    padding: 15px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+}
