@@ -31,7 +31,6 @@
         <table id="patients" class="table table-striped table-hover">
             <thead>
                 <tr>
-            <th>ID</th>
             <th>Nombre Completo</th>
             <th>Teléfono</th>
             <th>Email</th>
@@ -41,65 +40,35 @@
                 </tr>
             </thead>
             <tbody>
+
+            <?php
+            require_once '../../../app/models/Patients/getPatients.php';
+
+            $pacientes = getPatients();
+
+            foreach($pacientes as $paciente): ?>
                 <tr>
-                <td>1</td>
-                <td>Juan Pérez</td>
+                <td><?= $paciente['NombreCompleto'] ?></td>
                 <td>juan@email.com</td>
                 <td>555-1234</td>
                 <td>2024-01-15</td>
                 <td><span class="fa-solid fa-circle"></span></td>
                 <td>
-                    <button class="fa-solid fa-pen-to-square btn-secondary"></button>
                     <button class="fa-solid fa-trash btn-secondary"></button>
                 </td>
                 </tr>
+                <?PHP endforeach; ?>
             </tbody>
         </table>
-
-
-
-        <form action="../../../config/database.php" method = 'POST'>
-            <label for="nombre">Nombre de paciente</label>
-            <input class="form-control" name = "nombre" type="text" placeholder="Nombre de usuario">
-
-            <label for="nombre">CURP </label>
-            <input class="form-control" name = "curp" type="text" placeholder="Nombre de usuario">
-
-            <label for="nombre">Fecha de nacimiento</label>
-            <input class="form-control" name = "fecha_nacimiento" type="date" placeholder="Nombre de usuario">
-
-            <label for="nombre">Sexo</label>
-            <input class="form-control" name = "sexo" type="text" placeholder="Nombre de usuario">
-
-            <label for="nombre">Teléfono</label>
-            <input class="form-control" name = "telefono" type="text" placeholder="Nombre de usuario">
-
-            <label for="nombre">Correo electrónico</label>
-            <input class="form-control" name = "correo" type="text" >
-
-            <label for="nombre">Dirección del paciente</label>
-            <input class="form-control" name = "direccion" type="text" >
-
-            <label for="nombre">Contacto de emergencia</label>
-            <input class="form-control" name = "contacto_emergencia" type="number" >
-
-            <label for="nombre">Teléfono de emergencia</label>
-            <input class="form-control" name = "telefono_emergencia" type="text" >
-
-            <label for="nombre">Alergias</label>
-            <input class="form-control" name = "alergias" type="text" >
-
-            <label for="nombre">Antecendentes</label>
-            <input class="form-control" name = "antecedentes" type="text" >
-            
-            <button type="submit" id = "createPatient" class = "btn-primary"><i class="fa-solid fa-plus"></i>Crear paciente</button>
-
+        <form action="../../../app/models/Patients/createPatient.php" method="post">
+        <button type="submit" id = "createPatient" class = "btn-primary"><i class="fa-solid fa-plus"></i>Crear paciente</button>
         </form>
+
+
     </div>
 
     
 
     <script src="../../js/patients.js"></script>
-    <script src="../../../app/controllers/patientsController.js"></script>
 </body>
 </html>
