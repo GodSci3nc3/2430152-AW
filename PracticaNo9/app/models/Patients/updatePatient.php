@@ -4,10 +4,7 @@
     function getPatients () {
     global $pdo;
 
-
-
         $sql = "SELECT NombreCompleto, Telefono, CorreoElectronico, FechaRegistro, Estatus FROM Pacientes;";
-
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 
@@ -43,9 +40,6 @@
     
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-
     }
 
 ?>

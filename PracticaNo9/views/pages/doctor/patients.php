@@ -31,10 +31,10 @@
         <table id="patients" class="table table-striped table-hover">
             <thead>
                 <tr>
-            <th>Nombre Completo</th>
-            <th>Teléfono</th>
-            <th>Email</th>
-            <th>Fecha Registro</th>
+            <th>Nombre completo</th>
+            <th>Número de teléfono</th>
+            <th>Correo electrónico</th>
+            <th>Fecha de registro</th>
             <th>Estado</th>
             <th>Acciones</th>
                 </tr>
@@ -49,20 +49,21 @@
             foreach($pacientes as $paciente): ?>
                 <tr>
                 <td><?= $paciente['NombreCompleto'] ?></td>
-                <td>juan@email.com</td>
-                <td>555-1234</td>
-                <td>2024-01-15</td>
+                <td><?= $paciente['Telefono']?></td>
+                <td><?= $paciente['CorreoElectronico']?></td>
+                <td><?= $paciente['FechaRegistro']?></td>
                 <td><span class="fa-solid fa-circle"></span></td>
                 <td>
                     <button class="fa-solid fa-trash btn-secondary"></button>
                 </td>
                 </tr>
-                <?PHP endforeach; ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
+        </form>
+
         <form action="../../../app/models/Patients/createPatient.php" method="post">
         <button type="submit" id = "createPatient" class = "btn-primary"><i class="fa-solid fa-plus"></i>Crear paciente</button>
-        </form>
 
 
     </div>
