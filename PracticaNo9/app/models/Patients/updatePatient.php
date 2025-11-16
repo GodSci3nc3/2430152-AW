@@ -1,10 +1,10 @@
 <?php
     require_once __DIR__ . '/../../../config/connectDatabase.php';
 
-    function getPatients () {
+    function updatePatient ($column, $change, $idPatient) {
     global $pdo;
 
-        $sql = "SELECT NombreCompleto, Telefono, CorreoElectronico, FechaRegistro, Estatus FROM Pacientes;";
+        $sql = "UPDATE ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 
