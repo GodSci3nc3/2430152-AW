@@ -6,7 +6,7 @@
 
 
 
-        $sql = "SELECT NombreCompleto, Telefono, CorreoElectronico, FechaRegistro, Estatus FROM Pacientes;";
+        $sql = "SELECT IdPaciente, NombreCompleto, Telefono, CorreoElectronico, FechaRegistro, Estatus FROM Pacientes;";
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute();

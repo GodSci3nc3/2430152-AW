@@ -1,15 +1,15 @@
 <?php
-include '../../config/connectDatabase.php';
+include '../../../config/connectDatabase.php';
 
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $sql = "INSERT INTO Pacientes 
             (NombreCompleto, CURP, FechaNacimiento, Sexo, Telefono, CorreoElectronico, Direccion, 
-             ContactoEmergencia, TelefonoEmergencia, Alergias, AntecedentesMedicos)
+             ContactoEmergencia, TelefonoEmergencia, Alergias, AntecedentesMedicos, Estatus)
             VALUES 
             (:nombre, :curp, :fecha_nacimiento, :sexo, :telefono, :correo, :direccion,
-             :contacto_emergencia, :telefono_emergencia, :alergias, :antecedentes)";
+             :contacto_emergencia, :telefono_emergencia, :alergias, :antecedentes, :estatus)";
 
         $nombre = "Sin nombre";
         $curp = "XXXX000000XXXXXXX0";
@@ -22,6 +22,7 @@ include '../../config/connectDatabase.php';
         $telefono_emergencia = "Sin teléfono";
         $alergias = "Sin especificar";
         $antecedentes = "Sin especificar";
+        $estatus = 1;
 
         $stmt = $pdo->prepare($sql);
         
@@ -36,6 +37,7 @@ include '../../config/connectDatabase.php';
         $stmt->bindParam(':telefono_emergencia', $telefono_emergencia);
         $stmt->bindParam(':alergias', $alergias);
         $stmt->bindParam(':antecedentes', $antecedentes);
+        $stmt->bindParam(':estatus', $estatus);
 
         /* 
         $stmt->bindParam(':nombre', $_POST['nombre']);
@@ -52,7 +54,7 @@ include '../../config/connectDatabase.php';
         */
 
         $stmt->execute();
-        header('Location: ../views/pages/doctor/patients.html?success=1');
+        header('Location: ../../../views/pages/doctor/patients.php?success=1');
         exit();
     } else {
         echo 'Método de petición incorrecto';

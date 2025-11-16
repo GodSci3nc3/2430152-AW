@@ -47,14 +47,14 @@
             $pacientes = getPatients();
 
             foreach($pacientes as $paciente): ?>
-                <tr>
-                <td><?= $paciente['NombreCompleto'] ?></td>
-                <td><?= $paciente['Telefono']?></td>
-                <td><?= $paciente['CorreoElectronico']?></td>
-                <td><?= $paciente['FechaRegistro']?></td>
-                <td><span class="fa-solid fa-circle"></span></td>
+                <tr data-patient-id = "<?= $paciente['IdPaciente'] ?>">
+                <td data-field = 'NombreCompleto' contenteditable = 'true'><?= $paciente['NombreCompleto'] ?></td>
+                <td data-field = 'Telefono' contenteditable = 'true'><?= $paciente['Telefono']?></td>
+                <td data-field = 'CorreoElectronico' contenteditable = 'true'><?= $paciente['CorreoElectronico']?></td>
+                <td data-field = 'FechaRegistro' contenteditable = 'true'><?= $paciente['FechaRegistro']?></td>
+                <td><? if($paciente['Estatus'] == 1){ ?><span class="fa-solid fa-circle"></span><? }else {?><span class="fa-regular fa-circle"></span><?}?></td>
                 <td>
-                    <button class="fa-solid fa-trash btn-secondary"></button>
+                    <button class="fa-solid fa-trash btn-secondary deleteBtn"></button>
                 </td>
                 </tr>
                 <?php endforeach; ?>
@@ -71,5 +71,6 @@
     
 
     <script src="../../js/patients.js"></script>
+    <script src="../../../app/controllers/patientController.js"></script>
 </body>
 </html>
