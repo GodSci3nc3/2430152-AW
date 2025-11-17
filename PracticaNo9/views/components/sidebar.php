@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../../resources/Medicore Logo.png">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/globalStyles.css">
+    <link rel="stylesheet" href="/PracticaNo9/views/styles/globalStyles.css">
 
     <script src="https://kit.fontawesome.com/aad8366bcb.js" crossorigin="anonymous"></script>
 
-    <title></title>
-</head>
-<body>
 
-
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+            <nav class="d-md-block sidebar">
                 <div class="position-sticky pt-3">
                     <div class="d-flex align-items-center mb-3 text-decoration-none">
-                        <img src="../../resources/Medicore Logo.png" alt="" width="32" height="32" class="me-2">
+                        <img src="/PracticaNo9/resources/Medicore Logo.png" alt="" width="32" height="32" class="me-2">
                         <span class="fs-5 fw-bold text-primary-title">Medicore</span>
                     </div>
                 <hr>
@@ -71,7 +60,4 @@
 
                 </ul>
             </nav>
-        </div>
-    </div>
-</body>
-</html>
+

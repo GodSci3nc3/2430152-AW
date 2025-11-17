@@ -51,7 +51,7 @@
                 <td data-field = 'NombreCompleto' contenteditable = 'true'><?= $paciente['NombreCompleto'] ?></td>
                 <td data-field = 'Telefono' contenteditable = 'true'><?= $paciente['Telefono']?></td>
                 <td data-field = 'CorreoElectronico' contenteditable = 'true'><?= $paciente['CorreoElectronico']?></td>
-                <td data-field = 'FechaRegistro' contenteditable = 'true'><?= $paciente['FechaRegistro']?></td>
+                <td><?= $paciente['FechaRegistro']?></td>
                 <td><? if($paciente['Estatus'] == 1){ ?><span class="fa-solid fa-circle"></span><? }else {?><span class="fa-regular fa-circle"></span><?}?></td>
                 <td>
                     <button class="fa-solid fa-trash btn-secondary deleteBtn"></button>

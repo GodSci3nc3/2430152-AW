@@ -33,14 +33,14 @@
                    <form id="loginForm">
 
                        <label class="mb-3" for="email">Correo electrónico</label>
-                       <input class = "form-control mb-3" id="loginEmail" type="email">
+                       <input class = "form-control mb-3" name="email" id="loginEmail" type="email">
 
 
                        <label class="mb-3" for="password">Contraseña</label>
-                       <input class = "form-control mb-5" id="loginPassword" type="password">
+                       <input class = "form-control mb-5" name="password" id="loginPassword" type="password">
 
                        <div class="d-grid text-center">
-                            <button class="btn-primary mb-5 p-2" type="submit">Iniciar sesión</button>
+                            <button id = "login" class="btn-primary mb-5 p-2" type="submit">Iniciar sesión</button>
 
                         </div>
 
@@ -51,7 +51,8 @@
        </div>
    </div>
 
-   <script src="../js/auth.js"></script>
+   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+   <script src="../../app/controllers/authController.js"></script>
 
 </body>
 </html>

@@ -17,7 +17,19 @@
     <title>Dashboard | Medicore System</title>
 </head>
 <body>
-        <div id="welcome-message" class="welcome-screen">
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3 d-md-block">
+        <?php
+        require '../../components/sidebar.php'
+        ?>
+
+        </div>
+
+        <div class="col-md-9">
+            <div id="welcome-message" class="welcome-screen">
             <h1 class="text-primary-title">Bienvenido, Dr. Mario</h1>
         </div>
 
@@ -58,6 +70,11 @@
                 </div>
             </div>
         </div>
+        </div>
+        </div>
+
+        </div>
+
         </div>
 
 
