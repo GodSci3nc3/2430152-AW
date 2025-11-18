@@ -64,7 +64,8 @@
                     <td data-field = 'NombreCompleto' contenteditable = 'true'><?= $doctor['NombreCompleto'] ?></td>
                     <td data-field = 'Especialidad' contenteditable = 'true'><?= $doctor['Especialidad']?></td>
                     <td data-field = 'Telefono' contenteditable = 'true'><?= $doctor['CorreoElectronico']?></td>
-                    <td><?= $doctor['FechaRegistro']?></td>
+                    <td data-field = 'Email' contenteditable = 'true'><?= $doctor['CorreoElectronico']?></td>
+                    <td data-field = 'Horario' contenteditable = 'true'><?= $doctor['CorreoElectronico']?></td>
                     <td><? if($doctor['Estatus'] == 1){ ?><span class="fa-solid fa-circle"></span><? }else {?><span class="fa-regular fa-circle"></span><?}?></td>
                     <td>
                         <button class="fa-solid fa-trash btn-secondary deleteBtn"></button>
