@@ -73,7 +73,7 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        </form>
+   
 
         <form action="../../../app/models/Patients/createPatient.php" method="post">
         <button type="submit" id = "createPatient" class = "btn-primary"><i class="fa-solid fa-plus"></i>Crear paciente</button>

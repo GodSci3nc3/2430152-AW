@@ -62,10 +62,10 @@
                 foreach($doctors as $doctor): ?>
                     <tr data-doctor-id = "<?= $doctor['IdMedico'] ?>">
                     <td data-field = 'NombreCompleto' contenteditable = 'true'><?= $doctor['NombreCompleto'] ?></td>
-                    <td data-field = 'Especialidad' contenteditable = 'true'><?= $doctor['Especialidad']?></td>
+                    <td data-field = 'NombreEspecialidad' contenteditable = 'true'><?= $doctor['NombreEspecialidad']?></td>
                     <td data-field = 'Telefono' contenteditable = 'true'><?= $doctor['Telefono']?></td>
-                    <td data-field = 'Email' contenteditable = 'true'><?= $doctor['CorreoElectronico']?></td>
-                    <td data-field = 'Horario' contenteditable = 'true'><?= $doctor['HorarioAtencion']?></td>
+                    <td data-field = 'CorreoElectronico' contenteditable = 'true'><?= $doctor['CorreoElectronico']?></td>
+                    <td data-field = 'HorarioAtencion' contenteditable = 'true'><?= $doctor['HorarioAtencion']?></td>
                     <td><? if($doctor['Estatus'] == 1){ ?><span class="fa-solid fa-circle"></span><? }else {?><span class="fa-regular fa-circle"></span><?}?></td>
                     <td>
                         <button class="fa-solid fa-trash btn-secondary deleteBtn"></button>
@@ -75,6 +75,10 @@
 
             </tbody>
         </table>
+
+            <form action="../../../app/models/Doctors/createDoctor.php" method="post">
+            <button type="submit" id = "createDoctor" class = "btn-primary"><i class="fa-solid fa-plus"></i>Crear doctor</button>
+
 
     </div>
 
@@ -86,5 +90,6 @@
 
 
     <script src="../../js/doctors.js"></script>
+    <script src="../../../app/controllers/doctorController.js"></script>
 </body>
 </html>

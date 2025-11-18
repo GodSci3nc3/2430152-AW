@@ -40,23 +40,24 @@
     <div class="container-fluid p-5">
         <h1 class="text-primary-title mb-4">Especialidades en Medicore</h1>
 
-        <table id="doctors" class="table table-striped table-hover">
+        <table id="specialties" class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>Nombre</th>
                     <th>Descripción</th>
+                    <th>Acciones</th>
 
                 </tr>
             </thead>    
             <tbody>
 
             <?php
-                require_once '../../../app/models/admin/getSpecialties.php';
+                require_once '../../../app/models/Specialties/getSpecialties.php';
 
                 $specialties = getSpecialties();
 
                 foreach($specialties as $specialty): ?>
-                    <tr data-specialty-id = "<?= $specialty['IdMedico'] ?>">
+                    <tr data-specialty-id = "<?= $specialty['IdEspecialidad'] ?>">
                     <td data-field = 'NombreEspecialidad' contenteditable = 'true'><?= $specialty['NombreEspecialidad'] ?></td>
                     <td data-field = 'Descripcion' contenteditable = 'true'><?= $specialty['Descripcion']?></td>
                     <td>
@@ -68,6 +69,10 @@
             </tbody>
         </table>
 
+            <form action="../../../app/models/Specialties/createSpecialty.php" method="post">
+            <button type="submit" id = "createSpecialty" class = "btn-primary"><i class="fa-solid fa-plus"></i>Crear especialidad</button>
+
+
     </div>
 
     </div>
@@ -77,6 +82,7 @@
     </div>
 
 
-    <script src="../../js/doctors.js"></script>
+    <script src="../../js/specialties.js"></script>
+    <script src="../../../app/controllers/specialtyController.js"></script>
 </body>
 </html>

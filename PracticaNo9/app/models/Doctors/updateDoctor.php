@@ -1,14 +1,24 @@
 <?php
     require_once __DIR__ . '/../../../config/connectDatabase.php';
 
-    function getSpecialty () {
     global $pdo;
+    $patientId = $_POST['idDoctor'];
+    $column = $_POST['column'];
+    $change = $_POST['change'];
 
+    /* Never trust on frontend. All coming from user will validate in backend */
+    $allowed_columns = ['NombreCompleto', 'Telefono', 'CorreoElectronico', 'HorarioAtencion'];
 
+        if (!in_array($column, $allowed_columns)) {
+            exit();
+        }
 
-        $sql = "SELECT IdPaciente, NombreCompleto, Telefono, CorreoElectronico, FechaRegistro, Estatus FROM Pacientes;";
+        $sql = "UPDATE Medicos SET $column = :change WHERE IdMedico = :id";
 
         $stmt = $pdo->prepare($sql);
+
+        $stmt->bindParam(':id', $patientId);
+        $stmt->bindParam(':change', $change);
         $stmt->execute();
 
    
@@ -40,12 +50,6 @@
         $stmt->bindParam(':alergias', $_POST['alergias']);
         $stmt->bindParam(':antecedentes', $_POST['antecedentes']);
         */
-    
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-
-    }
 
 ?>
