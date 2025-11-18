@@ -25,6 +25,19 @@
 
 </head>
 <body>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 d-md-block ">
+
+            <?php require '../../components/sidebar.php';?>
+
+            </div>
+
+            <div class="col-md-9">
+
+
     <div class="container-fluid p-5">
         <h1 class="text-primary-title mb-4">Pacientes en Medicore</h1>
 
@@ -68,6 +81,10 @@
 
     </div>
 
+    </div>
+
+    </div>
+    </div>
     
 
     <script src="../../js/patients.js"></script>

@@ -16,23 +16,23 @@
 
                 <ul>
                     <li class="nav-item pt-3">
-                        <a href="../pages/dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i>Inicio</a>
+                        <a href="/PracticaNo9/views/pages/admin/dashboard_admin.php" class="nav-link"><i class="fa-solid fa-house"></i>Inicio</a>
                     </li>
 
                     <li class="nav-item pt-3">
-                        <a href="../pages/patients.html" class="nav-link"><i class="fa-solid fa-hospital-user"></i>Pacientes</a>
+                        <a href="/PracticaNo9/views/pages/doctor/patients.php" class="nav-link"><i class="fa-solid fa-hospital-user"></i>Pacientes</a>
                     </li>
 
                     <li class="nav-item pt-3">
-                        <a href="../pages/doctors.html" class="nav-link"><i class="fa-solid fa-user-doctor"></i>Doctores</a>
+                        <a href="/PracticaNo9/views/pages/admin/doctors.php" class="nav-link"><i class="fa-solid fa-user-doctor"></i>Doctores</a>
                     </li>
 
                     <li class="nav-item pt-3">
-                        <a href="../pages/appointments.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i>Citas médicas</a>
+                        <a href="#" class="nav-link"><i class="fa-solid fa-calendar-check"></i>Citas médicas</a>
                     </li>
 
                     <li class="nav-item pt-3">
-                        <a href="../pages/fees_and_payments.html" class="nav-link"><i class="fa-solid fa-credit-card"></i>Pagos y tarifas</a>
+                        <a href="/PracticaNo9/views/pages/receptionist/fees_and_payments.php" class="nav-link"><i class="fa-solid fa-credit-card"></i>Pagos y tarifas</a>
                     </li>
 
                     <li class="nav-item pt-3">
