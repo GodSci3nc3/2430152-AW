@@ -28,6 +28,10 @@
                     </li>
 
                     <li class="nav-item pt-3">
+                        <a href="/PracticaNo9/views/pages/admin/specialties.php" class="nav-link"><i class="fa-solid fa-book-medical"></i>Especialidades</a>
+                    </li>
+
+                    <li class="nav-item pt-3">
                         <a href="#" class="nav-link"><i class="fa-solid fa-calendar-check"></i>Citas médicas</a>
                     </li>
 

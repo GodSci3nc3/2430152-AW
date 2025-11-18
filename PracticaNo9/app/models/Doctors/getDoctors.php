@@ -1,12 +1,12 @@
 <?php
     require_once __DIR__ . '/../../../config/connectDatabase.php';
 
-    function getPatients () {
+    function getDoctors () {
     global $pdo;
 
 
 
-        $sql = "SELECT IdPaciente, NombreCompleto, Telefono, CorreoElectronico, FechaRegistro, Estatus FROM Pacientes;";
+        $sql = "SELECT m.IdMedico, m.NombreCompleto, e.NombreEspecialidad, m.Telefono, m.CorreoElectronico, m.HorarioAtencion FROM Medicos m INNER JOIN Especialidades e ON m.EspecialidadId = e.IdEspecialidad;";
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute();

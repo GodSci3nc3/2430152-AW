@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pacientes en Medicore</title>
+    <title>Doctores en Medicore</title>
 
 
     <link rel="icon" href="../../../resources/Medicore Logo.png">
@@ -60,12 +60,12 @@
                 $doctors = getDoctors();
 
                 foreach($doctors as $doctor): ?>
-                    <tr data-doctor-id = "<?= $doctor['IdPaciente'] ?>">
+                    <tr data-doctor-id = "<?= $doctor['IdMedico'] ?>">
                     <td data-field = 'NombreCompleto' contenteditable = 'true'><?= $doctor['NombreCompleto'] ?></td>
                     <td data-field = 'Especialidad' contenteditable = 'true'><?= $doctor['Especialidad']?></td>
-                    <td data-field = 'Telefono' contenteditable = 'true'><?= $doctor['CorreoElectronico']?></td>
+                    <td data-field = 'Telefono' contenteditable = 'true'><?= $doctor['Telefono']?></td>
                     <td data-field = 'Email' contenteditable = 'true'><?= $doctor['CorreoElectronico']?></td>
-                    <td data-field = 'Horario' contenteditable = 'true'><?= $doctor['CorreoElectronico']?></td>
+                    <td data-field = 'Horario' contenteditable = 'true'><?= $doctor['HorarioAtencion']?></td>
                     <td><? if($doctor['Estatus'] == 1){ ?><span class="fa-solid fa-circle"></span><? }else {?><span class="fa-regular fa-circle"></span><?}?></td>
                     <td>
                         <button class="fa-solid fa-trash btn-secondary deleteBtn"></button>
