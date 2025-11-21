@@ -1,27 +1,17 @@
 <?php
     require_once __DIR__ . '/../../../config/connectDatabase.php';
 
+    function getFees () {
     global $pdo;
-    $patientId = $_POST['idPatient'];
-    $column = $_POST['column'];
-    $change = $_POST['change'];
 
-    /* Never trust on frontend. All coming from user will validate in backend */
-    $allowed_columns = ['NombreCompleto', 'Telefono', 'CorreoElectronico'];
 
-        if (!in_array($column, $allowed_columns)) {
-            exit();
-        }
 
-        $sql = "UPDATE Pacientes SET $column = :change WHERE IdPaciente = :id";
+        $sql = "SELECT p.IdTarifa, p.DescripcionServicio, p.CostoBase, e.NombreEspecialidad, p.Estatus FROM Tarifas p INNER JOIN Especialidades e ON p.EspecialidadId = e.IdEspecialidad;";
 
         $stmt = $pdo->prepare($sql);
-
-        $stmt->bindParam(':id', $patientId);
-        $stmt->bindParam(':change', $change);
         $stmt->execute();
 
-
+   
         /*
         
         $stmt->bindParam(':nombre', $nombre);
@@ -50,6 +40,12 @@
         $stmt->bindParam(':alergias', $_POST['alergias']);
         $stmt->bindParam(':antecedentes', $_POST['antecedentes']);
         */
+    
 
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+    }
 
 ?>

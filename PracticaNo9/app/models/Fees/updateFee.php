@@ -2,22 +2,22 @@
     require_once __DIR__ . '/../../../config/connectDatabase.php';
 
     global $pdo;
-    $patientId = $_POST['idPatient'];
+    $feeId = $_POST['idFee'];
     $column = $_POST['column'];
     $change = $_POST['change'];
 
     /* Never trust on frontend. All coming from user will validate in backend */
-    $allowed_columns = ['NombreCompleto', 'Telefono', 'CorreoElectronico'];
+    $allowed_columns = ['DescripcionServicio', 'CostoBase'];
 
         if (!in_array($column, $allowed_columns)) {
             exit();
         }
 
-        $sql = "UPDATE Pacientes SET $column = :change WHERE IdPaciente = :id";
+        $sql = "UPDATE Tarifas SET $column = :change WHERE IdTarifa = :id";
 
         $stmt = $pdo->prepare($sql);
 
-        $stmt->bindParam(':id', $patientId);
+        $stmt->bindParam(':id', $feeId);
         $stmt->bindParam(':change', $change);
         $stmt->execute();
 
