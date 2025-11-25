@@ -1,19 +1,20 @@
 <?php
     include '../../../config/connectDatabase.php';
     session_start();
-    $email = $_POST['email'];
-            $password = $_POST['password'];
-        $sql = "SELECT Usuario, ContrasenaHash, Rol FROM Usuarios WHERE Usuario = :email";
+    
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $sql = "SELECT Usuario, ContrasenaHash, Rol FROM Usuarios WHERE Usuario = :username";
         $stmt = $pdo->prepare($sql);
 
-        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':username', $username);
         $stmt->execute();
         
         $response = $stmt->fetch(PDO::FETCH_ASSOC);
         
         if($response){
             if(password_verify($password, $response['ContrasenaHash'])){
-                $_SESSION['email'] = $response['Usuario'];
+                $_SESSION['username'] = $response['Usuario'];
                 $_SESSION['rol'] = $response['Rol'];
                 switch($response['Rol']) {
                     case 'admin': 

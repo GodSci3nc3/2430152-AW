@@ -3,14 +3,14 @@ const loginBtn = document.getElementById('login');
 loginBtn.addEventListener('click', function(e) {
     e.preventDefault();
 
-    const email = document.getElementById('loginEmail').value;
+    const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
 
     $.ajax({
         url: '../../app/models/User/auth.php',
         type: 'POST',
         data: {
-            email: email,
+            username: username,
             password: password
         },
         success: function(response) {

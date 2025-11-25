@@ -1,3 +1,15 @@
+<?php
+
+session_start();
+
+if(!isset($_SESSION['username'])){
+
+    session_destroy();
+    Header('Location: ../login.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +30,6 @@
 </head>
 <body>
 
-
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-3 d-md-block">
@@ -28,7 +39,7 @@
 
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-9 mainContent">
             <div id="welcome-message" class="welcome-screen">
             <h1 class="text-primary-title">Bienvenido, Dr. Mario</h1>
         </div>

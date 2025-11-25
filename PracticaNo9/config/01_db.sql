@@ -101,6 +101,7 @@ CREATE TABLE Reportes (
 CREATE TABLE Usuarios (
     IdUsuario INT AUTO_INCREMENT PRIMARY KEY,
     Usuario VARCHAR(50),
+    CorreoElectronico VARCHAR(100),
     ContrasenaHash VARCHAR(200),
     Rol VARCHAR(50),
     IdMedico INT NULL,

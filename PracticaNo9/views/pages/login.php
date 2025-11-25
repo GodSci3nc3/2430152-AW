@@ -1,3 +1,16 @@
+<?php 
+session_start();
+
+if(isset($_SESSION['rol'])) {
+    switch ($_SESSION['rol']){
+        case 'admin': Header('Location: admin/dashboard_admin.php'); break;
+        case 'doctor': Header('Location: doctor/dashboard_doctor.php'); break;
+        case 'receptionist': Header('Location: receptionist/dashboard_receptionist.php'); break;
+    }
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -32,8 +45,8 @@
                    </div>
                    <form id="loginForm">
 
-                       <label class="mb-3" for="email">Correo electrónico</label>
-                       <input class = "form-control mb-3" name="email" id="loginEmail" type="email">
+                       <label class="mb-3" for="username">Nombre de Usuario</label>
+                       <input class = "form-control mb-3" name="username" id="loginUsername" type="email">
 
 
                        <label class="mb-3" for="password">Contraseña</label>
