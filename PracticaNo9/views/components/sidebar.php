@@ -58,10 +58,12 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i>Cerrar sesión</a>
-                    </li>
-
+                        <a href="#" id = "logout" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i>Cerrar sesión</a>
+                    </form>
 
                 </ul>
             </nav>
+
+
+            <script src="/PracticaNo9/views/js/sidebar.js"></script>
 
