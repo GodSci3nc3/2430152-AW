@@ -4,8 +4,11 @@ session_start();
 
 if(!isset($_SESSION['username'])){
 
-    session_destroy();
     Header('Location: ../login.php');
+} else {
+    if($_SESSION['rol'] != 'admin'){
+        Header('Location: /PracticaNo9/views/components/404.html');
+    }
 }
 
 ?>

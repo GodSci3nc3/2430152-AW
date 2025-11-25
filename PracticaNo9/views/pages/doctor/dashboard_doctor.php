@@ -1,3 +1,17 @@
+<?php
+
+session_start();
+
+if(!isset($_SESSION['username'])){
+
+    Header('Location: ../login.php');
+} else {
+    if($_SESSION['rol'] != 'doctor'){
+        Header('Location: /PracticaNo9/views/components/404.html');
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +44,27 @@
     <title>Dashboard | Medicore System</title>
 </head>
 <body>
-    <div class="container-fluid p-5">
+
+    <div class="container-fluid">
+        <div class="row">
+
+        <div class="col-md-3 d-md-block">
+
+        <?php
+        require '../../components/sidebar.php'
+        ?>
+
+
+        </div>
+
+        <div class="col-md-9 mainContent">
+
+
+    <div class="container-fluid pt-5">
+            <div id="welcome-message" class="welcome-screen">
+            <h1 class="text-primary-title">Bienvenido, <?php echo $_SESSION['username']?></h1>
+        </div>
+
         <div class="row">
         <div class="col">
         <h1 class="text-primary-title">Agenda de hoy</h1>
@@ -69,6 +103,11 @@
         </div>
 
         </div>
+
+    </div>
+    </div>
+
+    </div>
 
     </div>
 

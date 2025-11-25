@@ -7,7 +7,7 @@
 
 
             <nav class="d-md-block sidebar">
-                <div class="position-sticky pt-3">
+                <div class="position-fixed pt-3">
                     <div class="d-flex align-items-center mb-3 text-decoration-none">
                         <img src="/PracticaNo9/resources/Medicore Logo.png" alt="" width="32" height="32" class="me-2">
                         <span class="fs-5 fw-bold text-primary-title">Medicore</span>
@@ -26,6 +26,13 @@
                     <li class="nav-item pt-3">
                         <a href="/PracticaNo9/views/pages/admin/doctors.php" class="nav-link"><i class="fa-solid fa-user-doctor"></i>Doctores</a>
                     </li>
+
+                    <!--
+                    <li class="nav-item pt-3">
+                        <a href="/PracticaNo9/views/pages/admin/users.php" class="nav-link"><i class="fa-solid fa-users"></i>Usuarios</a>
+                    </li>
+
+                    -->
 
                     <li class="nav-item pt-3">
                         <a href="/PracticaNo9/views/pages/admin/specialties.php" class="nav-link"><i class="fa-solid fa-book-medical"></i>Especialidades</a>
