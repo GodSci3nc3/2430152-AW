@@ -44,8 +44,8 @@ CREATE TABLE Citas (
     EstadoCita VARCHAR(20),
     Observaciones VARCHAR(250),
     FechaRegistro DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (IdPaciente) REFERENCES Pacientes(IdPaciente),
-    FOREIGN KEY (IdMedico) REFERENCES Medicos(IdMedico)
+    FOREIGN KEY (IdPaciente) REFERENCES Pacientes(IdPaciente) ON DELETE RESTRICT,
+    FOREIGN KEY (IdMedico) REFERENCES Medicos(IdMedico) ON DELETE RESTRICT
 );
 
 CREATE TABLE Expedientes (
@@ -59,8 +59,8 @@ CREATE TABLE Expedientes (
     RecetaMedica TEXT,
     NotasAdicionales TEXT,
     ProximaCita DATETIME NULL,
-    FOREIGN KEY (IdPaciente) REFERENCES Pacientes(IdPaciente),
-    FOREIGN KEY (IdMedico) REFERENCES Medicos(IdMedico)
+    FOREIGN KEY (IdPaciente) REFERENCES Pacientes(IdPaciente) ON DELETE RESTRICT,
+    FOREIGN KEY (IdMedico) REFERENCES Medicos(IdMedico) ON DELETE RESTRICT
 );
 
 CREATE TABLE Tarifas (
@@ -69,7 +69,7 @@ CREATE TABLE Tarifas (
     CostoBase DECIMAL(10,2),
     EspecialidadId INT NULL,
     Estatus BOOLEAN DEFAULT 1,
-    FOREIGN KEY (EspecialidadId) REFERENCES Especialidades(IdEspecialidad)
+    FOREIGN KEY (EspecialidadId) REFERENCES Especialidades(IdEspecialidad) ON DELETE RESTRICT
 );
 
 CREATE TABLE Pagos (
@@ -81,8 +81,8 @@ CREATE TABLE Pagos (
     FechaPago DATETIME DEFAULT CURRENT_TIMESTAMP,
     Referencia VARCHAR(100),
     EstatusPago VARCHAR(20),
-    FOREIGN KEY (IdCita) REFERENCES Citas(IdCita),
-    FOREIGN KEY (IdPaciente) REFERENCES Pacientes(IdPaciente)
+    FOREIGN KEY (IdCita) REFERENCES Citas(IdCita) ON DELETE RESTRICT,
+    FOREIGN KEY (IdPaciente) REFERENCES Pacientes(IdPaciente) ON DELETE RESTRICT
 );
 
 CREATE TABLE Reportes (
@@ -94,8 +94,8 @@ CREATE TABLE Reportes (
     RutaArchivo VARCHAR(250),
     Descripcion VARCHAR(250),
     GeneradoPor VARCHAR(100),
-    FOREIGN KEY (IdPaciente) REFERENCES Pacientes(IdPaciente),
-    FOREIGN KEY (IdMedico) REFERENCES Medicos(IdMedico)
+    FOREIGN KEY (IdPaciente) REFERENCES Pacientes(IdPaciente) ON DELETE SET NULL,
+    FOREIGN KEY (IdMedico) REFERENCES Medicos(IdMedico) ON DELETE SET NULL
 );
 
 CREATE TABLE Usuarios (
@@ -107,7 +107,7 @@ CREATE TABLE Usuarios (
     IdMedico INT NULL,
     Activo BOOLEAN DEFAULT 1,
     UltimoAcceso DATETIME,
-    FOREIGN KEY (IdMedico) REFERENCES Medicos(IdMedico)
+    FOREIGN KEY (IdMedico) REFERENCES Medicos(IdMedico) ON DELETE CASCADE
 );
 
 CREATE TABLE Bitacora (
@@ -116,5 +116,5 @@ CREATE TABLE Bitacora (
     FechaAcceso DATETIME DEFAULT CURRENT_TIMESTAMP,
     AccionRealizada VARCHAR(250),
     Modulo VARCHAR(100),
-    FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario)
+    FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario) ON DELETE RESTRICT
 );

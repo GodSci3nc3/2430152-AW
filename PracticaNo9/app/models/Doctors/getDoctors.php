@@ -7,7 +7,7 @@
 
 
         $sql = "SELECT m.IdMedico, m.NombreCompleto, e.NombreEspecialidad, m.Telefono, m.CorreoElectronico, m.HorarioAtencion, m.Estatus 
-        FROM Medicos m INNER JOIN Especialidades e ON m.EspecialidadId = e.IdEspecialidad;";
+        FROM Medicos m INNER JOIN Especialidades e ON m.EspecialidadId = e.IdEspecialidad WHERE m.Estatus = 1;";
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
