@@ -5,7 +5,7 @@ if(isset($_SESSION['rol'])) {
     switch ($_SESSION['rol']){
         case 'admin': Header('Location: admin/dashboard_admin.php'); break;
         case 'doctor': Header('Location: doctor/dashboard_doctor.php'); break;
-        case 'receptionist': Header('Location: receptionist/dashboard_receptionist.php'); break;
+        case 'receptionist': Header('Location: receptionist/appointments.php'); break;
     }
 
 }

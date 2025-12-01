@@ -16,7 +16,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var calendarEl = document.getElementById('agenda');
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridWeek'
+          initialView: 'dayGridWeek',
+          events: function(fetchInfo, successCallback, failureCallback) {
+            $.ajax({
+              url: '../../../app/models/Appointments/getAppointmentsCalendar.php',
+              type: 'GET',
+              success: function(data) {
+                var events = JSON.parse(data).map(function(appointment) {
+                  return {
+                    title: appointment.PatientName + ' - ' + appointment.MotivoConsulta,
+                    start: appointment.FechaCita,
+                    backgroundColor: '#007bff',
+                    borderColor: '#007bff'
+                  };
+                });
+                successCallback(events);
+              },
+              error: function() {
+                failureCallback();
+              }
+            });
+          }
         });
         calendar.render();
       });

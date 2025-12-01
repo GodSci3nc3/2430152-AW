@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,6 +70,9 @@
                 <td><?= $paciente['FechaRegistro']?></td>
                 <td><? if($paciente['Estatus'] == 1){ ?><span class="fa-solid fa-circle"></span><? }else {?><span class="fa-regular fa-circle"></span><?}?></td>
                 <td>
+                    <a href="record.php?id=<?= $paciente['IdPaciente'] ?>" class="btn btn-sm btn-outline-primary me-2">
+                        <i class="fa-solid fa-file-medical"></i>
+                    </a>
                     <button class="fa-solid fa-trash btn-secondary deleteBtn"></button>
                 </td>
                 </tr>

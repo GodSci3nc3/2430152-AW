@@ -4,7 +4,7 @@
     
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $sql = "SELECT Usuario, ContrasenaHash, Rol FROM Usuarios WHERE Usuario = :username";
+        $sql = "SELECT Usuario, ContrasenaHash, Rol, IdMedico FROM Usuarios WHERE Usuario = :username";
         $stmt = $pdo->prepare($sql);
 
         $stmt->bindParam(':username', $username);
@@ -16,6 +16,7 @@
             if(password_verify($password, $response['ContrasenaHash'])){
                 $_SESSION['username'] = $response['Usuario'];
                 $_SESSION['rol'] = $response['Rol'];
+                $_SESSION['idMedico'] = $response['IdMedico'];
                 switch($response['Rol']) {
                     case 'admin': 
                         echo json_encode(['success' => true, 'redirect' => 'admin/dashboard_admin.php']);
@@ -24,7 +25,7 @@
                         echo json_encode(['success' => true, 'redirect' => 'doctor/dashboard_doctor.php']);
                         break;
                     case 'receptionist': 
-                        echo json_encode(['success' => true, 'redirect' => 'receptionist/dashboard_receptionist.php']);
+                        echo json_encode(['success' => true, 'redirect' => 'receptionist/appointments.php']);
                         break;
                     }
                 } else {
