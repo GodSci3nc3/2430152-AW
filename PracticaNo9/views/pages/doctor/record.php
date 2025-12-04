@@ -5,7 +5,7 @@ session_start();
 if(!isset($_SESSION['username'])){
     Header('Location: ../login.php');
 } else {
-    if($_SESSION['rol'] != 'doctor'){
+    if($_SESSION['rol'] != 'doctor' && $_SESSION['rol'] != 'admin' && $_SESSION['rol'] != 'doctor'){
         Header('Location: /PracticaNo9/views/components/404.html');
     }
 }
@@ -47,36 +47,40 @@ if (!$idPaciente) {
 
     <div class="container-fluid p-5">
         
+        <div class="systemResponse">
+            <p id="systemResponse" class="systemResponse disabled">Respuesta del sistema</p>
+        </div>
+
         <?php
         require_once '../../../app/models/Records/getRecords.php';
         $patient = getPatientDetail($idPaciente);
         $records = getRecordsByPatient($idPaciente);
         ?>
 
-        <h1 class="text-primary-title mb-4">Medical Record - <?= $patient['NombreCompleto'] ?></h1>
+        <h1 class="text-primary-title mb-4">Expediente médico - <?= $patient['NombreCompleto'] ?></h1>
 
         <div class="row mb-4">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Patient information</h5>
+                        <h5 class="card-title">Información del paciente</h5>
                         <p><strong>CURP:</strong> <?= $patient['CURP'] ?></p>
-                        <p><strong>Birth date:</strong> <?= $patient['FechaNacimiento'] ?></p>
-                        <p><strong>Gender:</strong> <?= $patient['Sexo'] ?></p>
-                        <p><strong>Phone:</strong> <?= $patient['Telefono'] ?></p>
-                        <p><strong>Email:</strong> <?= $patient['CorreoElectronico'] ?></p>
-                        <p><strong>Address:</strong> <?= $patient['Direccion'] ?></p>
+                        <p><strong>Fecha de nacimiento:</strong> <?= $patient['FechaNacimiento'] ?></p>
+                        <p><strong>Sexo:</strong> <?= $patient['Sexo'] ?></p>
+                        <p><strong>Teléfono:</strong> <?= $patient['Telefono'] ?></p>
+                        <p><strong>Correo:</strong> <?= $patient['CorreoElectronico'] ?></p>
+                        <p><strong>Dirección:</strong> <?= $patient['Direccion'] ?></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Medical information</h5>
-                        <p><strong>Emergency contact:</strong> <?= $patient['ContactoEmergencia'] ?></p>
-                        <p><strong>Emergency phone:</strong> <?= $patient['TelefonoEmergencia'] ?></p>
-                        <p><strong>Allergies:</strong> <?= $patient['Alergias'] ?></p>
-                        <p><strong>Medical history:</strong> <?= $patient['AntecedentesMedicos'] ?></p>
+                        <h5 class="card-title">Información médica</h5>
+                        <p><strong>Contacto de emergencia:</strong> <?= $patient['ContactoEmergencia'] ?></p>
+                        <p><strong>Teléfono emergencia:</strong> <?= $patient['TelefonoEmergencia'] ?></p>
+                        <p><strong>Alergias:</strong> <?= $patient['Alergias'] ?></p>
+                        <p><strong>Antecedentes médicos:</strong> <?= $patient['AntecedentesMedicos'] ?></p>
                     </div>
                 </div>
             </div>
@@ -84,82 +88,82 @@ if (!$idPaciente) {
 
         <div class="row mb-4">
             <div class="col">
-                <h3>New consultation</h3>
+                <h3 class="text-primary-subtitle">Nueva consulta</h3>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="symptoms">Symptoms</label>
+                        <label for="symptoms">Síntomas</label>
                         <textarea class="form-control" id="symptoms" rows="3"></textarea>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="diagnosis">Diagnosis</label>
+                        <label for="diagnosis">Diagnóstico</label>
                         <textarea class="form-control" id="diagnosis" rows="3"></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="treatment">Treatment</label>
+                        <label for="treatment">Tratamiento</label>
                         <textarea class="form-control" id="treatment" rows="3"></textarea>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="prescription">Prescription</label>
+                        <label for="prescription">Receta médica</label>
                         <textarea class="form-control" id="prescription" rows="3"></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="notes">Additional notes</label>
+                        <label for="notes">Notas adicionales</label>
                         <textarea class="form-control" id="notes" rows="2"></textarea>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="nextAppointment">Next appointment</label>
+                        <label for="nextAppointment">Próxima cita</label>
                         <input type="datetime-local" class="form-control" id="nextAppointment">
                     </div>
                 </div>
                 <button id="saveConsultation" class="btn-primary" data-patient-id="<?= $idPaciente ?>">
-                    <i class="fa-solid fa-save"></i>Save consultation
+                    <i class="fa-solid fa-save"></i>Guardar consulta
                 </button>
             </div>
         </div>
 
         <div class="row">
             <div class="col">
-                <h3>Consultation history</h3>
+                <h3 class="text-primary-subtitle mb-3">Historial de consultas</h3>
                 <?php if (empty($records)): ?>
-                    <p class="text-body">No consultations recorded for this patient.</p>
+                    <p class="text-primary-p">No hay consultas registradas para este paciente.</p>
                 <?php else: ?>
                     <?php foreach($records as $record): ?>
                         <div class="card mb-3">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <h5 class="card-title">Consultation - <?= $record['FechaConsulta'] ?></h5>
-                                        <p><strong>Doctor:</strong> <?= $record['DoctorName'] ?></p>
+                                        <h5 class="card-title">Consulta - <?= $record['FechaConsulta'] ?></h5>
+                                        <p><strong>Médico:</strong> <?= $record['DoctorName'] ?></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <p><strong>Symptoms:</strong></p>
+                                        <p><strong>Síntomas:</strong></p>
                                         <p data-field="Sintomas" data-record-id="<?= $record['IdExpediente'] ?>" contenteditable="true"><?= $record['Sintomas'] ?></p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><strong>Diagnosis:</strong></p>
+                                        <p><strong>Diagnóstico:</strong></p>
                                         <p data-field="Diagnostico" data-record-id="<?= $record['IdExpediente'] ?>" contenteditable="true"><?= $record['Diagnostico'] ?></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <p><strong>Treatment:</strong></p>
+                                        <p><strong>Tratamiento:</strong></p>
                                         <p data-field="Tratamiento" data-record-id="<?= $record['IdExpediente'] ?>" contenteditable="true"><?= $record['Tratamiento'] ?></p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><strong>Prescription:</strong></p>
+                                        <p><strong>Receta médica:</strong></p>
                                         <p data-field="RecetaMedica" data-record-id="<?= $record['IdExpediente'] ?>" contenteditable="true"><?= $record['RecetaMedica'] ?></p>
                                     </div>
                                 </div>
                                 <?php if ($record['NotasAdicionales']): ?>
                                 <div class="row">
                                     <div class="col">
-                                        <p><strong>Additional notes:</strong></p>
+                                        <p><strong>Notas adicionales:</strong></p>
                                         <p data-field="NotasAdicionales" data-record-id="<?= $record['IdExpediente'] ?>" contenteditable="true"><?= $record['NotasAdicionales'] ?></p>
                                     </div>
                                 </div>

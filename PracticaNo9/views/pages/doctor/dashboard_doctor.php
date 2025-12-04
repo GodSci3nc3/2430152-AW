@@ -77,25 +77,25 @@ if(!isset($_SESSION['username'])){
             $todayAppointments = getTodayAppointments($_SESSION['idMedico']);
             
             if (empty($todayAppointments)): ?>
-                <p class="text-body">No appointments scheduled for today.</p>
+                <p class="text-primary-p" style="color: var(--color-text-light);">No hay citas programadas para hoy.</p>
             <?php else: ?>
 
-<ol class="relative border-s border-default">
+<ol class="relative border-s" style="border-color: var(--color-border);">
     <?php foreach($todayAppointments as $appointment): 
         $fecha = new DateTime($appointment['FechaCita']);
     ?>                  
-    <li class="mb-10 ms-4">
-        <div class="absolute w-3 h-3 bg-neutral-quaternary rounded-full mt-1.5 -start-1.5 border border-buffer"></div>
-        <time class="text-sm font-normal leading-none text-body"><?= $fecha->format('H:i') ?></time>
-        <h3 class="text-lg font-semibold text-heading my-2"><?= $appointment['PatientName'] ?></h3>
-        <p class="mb-4 text-base font-normal text-body"><?= $appointment['MotivoConsulta'] ?></p>
+    <li class="mb-4 ms-4">
+        <div class="position-absolute rounded-circle" style="width: 12px; height: 12px; background-color: var(--color-primary); margin-top: 6px; margin-left: -22px; border: 2px solid var(--color-white);"></div>
+        <time class="small" style="color: var(--color-text-light);"><?= $fecha->format('H:i') ?></time>
+        <h3 class="text-primary-subtitle my-2"><?= $appointment['PatientName'] ?></h3>
+        <p class="mb-3" style="color: var(--color-text-light);"><?= $appointment['MotivoConsulta'] ?></p>
     </li>
     <?php endforeach; ?>
 </ol>
 
             <?php endif; 
         } else { ?>
-            <p class="text-body">Error: Doctor session not found.</p>
+            <p class="text-primary-p" style="color: var(--color-text-light);">Error: Sesión de médico no encontrada.</p>
         <?php } ?>
 
 

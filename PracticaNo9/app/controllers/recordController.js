@@ -1,5 +1,6 @@
 const recordData = document.querySelectorAll('p[contenteditable="true"]')
 const saveConsultationBtn = document.getElementById('saveConsultation')
+const message = document.getElementById('systemResponse')
 
 if (saveConsultationBtn) {
     saveConsultationBtn.addEventListener('click', function() {
@@ -24,10 +25,15 @@ if (saveConsultationBtn) {
                 nextAppointment: nextAppointment
             },
             success: function() {
-                location.reload();
+                message.textContent = 'Consulta guardada exitosamente';
+                message.classList.add('active');
+                setTimeout(function() {
+                    location.reload();
+                }, 1500);
             },
             error: function() {
-                console.log('Error saving consultation');
+                message.textContent = 'Error al guardar la consulta';
+                message.classList.add('active');
             }
         })
     })
@@ -50,8 +56,13 @@ recordData.forEach(data => {
                 column: column,
                 change: value
             },
+            success: function() {
+                message.textContent = 'Campo actualizado';
+                message.classList.add('active');
+            },
             error: function() {
-                console.log('Error updating record')
+                message.textContent = 'Error al actualizar';
+                message.classList.add('active');
             }
         })
 

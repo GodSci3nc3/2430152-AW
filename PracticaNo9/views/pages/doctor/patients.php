@@ -1,5 +1,13 @@
 <?php
 session_start();
+
+if(!isset($_SESSION['username'])){
+    Header('Location: ../login.php');
+} else {
+    if($_SESSION['rol'] != 'doctor' && $_SESSION['rol'] != 'admin' && $_SESSION['rol'] != 'receptionist'){
+        Header('Location: /PracticaNo9/views/components/404.html');
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
