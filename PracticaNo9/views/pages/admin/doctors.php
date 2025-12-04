@@ -83,6 +83,7 @@ if(!isset($_SESSION['username'])){
                     <td data-field = 'HorarioAtencion' contenteditable = 'true'><?= $doctor['HorarioAtencion']?></td>
                     <td><? if($doctor['Estatus'] == 1){ ?><span class="fa-solid fa-circle"></span><? }else {?><span class="fa-regular fa-circle"></span><?}?></td>
                     <td>
+                        <a href="doctorProfile.php?id=<?= $doctor['IdMedico'] ?>" class="fa-solid fa-eye btn-secondary me-2 icon-btn"></a>
                         <button class="fa-solid fa-trash btn-secondary deleteBtn"></button>
                     </td>
                     </tr>

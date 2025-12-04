@@ -1,13 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página no encontrada | Medicore</title>
+    <title>Página no encontrada - Medicore</title>
+    <link rel="icon" href="../../resources/Medicore Logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #faf8f5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .container-404 {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        .big-404 {
+            font-size: 250px;
+            font-weight: 800;
+            color: rgba(44, 44, 44, 0.1);
+            line-height: 1;
+            margin-bottom: -80px;
+            user-select: none;
+        }
+        .content-404 {
+            position: relative;
+            z-index: 20;
+        }
+        h1 {
+            color: #2c2c2c;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 8px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn-back {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 14px 32px;
+            background-color: #2c2c2c;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .btn-back:hover {
+            background-color: #1a1a1a;
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 <body>
-
-    <h1>404</h1>
-    
+    <div class="container-404">
+        <div class="big-404">404</div>
+        <div class="content-404">
+            <h1>Página no encontrada</h1>
+            <p>La página que buscas no existe o no tienes permisos para acceder a ella.</p>
+            <p>Si crees que deberías tener acceso, contacta al administrador del sistema.</p>
+            <a href="javascript:history.back()" class="btn-back">Volver atrás</a>
+        </div>
+    </div>
 </body>
 </html>

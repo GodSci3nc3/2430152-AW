@@ -1,3 +1,18 @@
+<?php
+session_start();
+require_once '../../../app/helpers/permissions.php';
+
+if(!isset($_SESSION['username'])){
+    Header('Location: ../login.php');
+    exit();
+}
+
+checkPermission('tarifas');
+
+// Obtener pagos
+$paymentResult = json_decode(file_get_contents('http://localhost/PracticaNo9/app/models/Payments/getPayments.php'), true);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,14 +51,78 @@
     <div class="container-fluid p-5">
         <h1 class="text-primary-title mb-4">Pagos y tarifas en Medicore</h1>
 
+        <!-- Sección de Pagos -->
+        <h3 class="text-primary-subtitle mb-3">Pagos Generados</h3>
+        <table id="paymentsTable" class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID Pago</th>
+                    <th>Paciente</th>
+                    <th>Fecha Cita</th>
+                    <th>Médico</th>
+                    <th>Especialidad</th>
+                    <th>Servicio</th>
+                    <th>Monto</th>
+                    <th>Método Pago</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+            if ($paymentResult && $paymentResult['success']) {
+                foreach ($paymentResult['data'] as $pago) {
+                    $fecha = $pago['FechaCita'] ? date('d/m/Y H:i', strtotime($pago['FechaCita'])) : 'N/A';
+                    $servicio = $pago['DescripcionServicio'] ?? 'Consulta general';
+                    echo "<tr data-payment-id='{$pago['IdPago']}'>";
+                    echo "<td>{$pago['IdPago']}</td>";
+                    echo "<td>{$pago['NombrePaciente']}</td>";
+                    echo "<td>{$fecha}</td>";
+                    echo "<td>{$pago['NombreMedico']}</td>";
+                    echo "<td>{$pago['NombreEspecialidad']}</td>";
+                    echo "<td>{$servicio}</td>";
+                    echo "<td>$" . number_format($pago['Monto'], 2) . "</td>";
+                    echo "<td>";
+                    if ($pago['MetodoPago'] === 'Pendiente') {
+                        echo "<select class='form-select form-select-sm payment-method' data-id='{$pago['IdPago']}'>";
+                        echo "<option value='Pendiente' selected>Pendiente</option>";
+                        echo "<option value='Efectivo'>Efectivo</option>";
+                        echo "<option value='Tarjeta'>Tarjeta</option>";
+                        echo "<option value='Transferencia'>Transferencia</option>";
+                        echo "</select>";
+                    } else {
+                        echo $pago['MetodoPago'];
+                    }
+                    echo "</td>";
+                    echo "<td>";
+                    if ($pago['EstatusPago'] === 'pendiente') {
+                        echo "<select class='form-select form-select-sm payment-status' data-id='{$pago['IdPago']}'>";
+                        echo "<option value='pendiente' selected>Pendiente</option>";
+                        echo "<option value='pagado'>Pagado</option>";
+                        echo "<option value='cancelado'>Cancelado</option>";
+                        echo "</select>";
+                    } else {
+                        echo ucfirst($pago['EstatusPago']);
+                    }
+                    echo "</td>";
+                    echo "</tr>";
+                }
+            }
+            ?>
+            </tbody>
+        </table>
+
+        <hr class="my-5">
+
+        <!-- Sección de Tarifas -->
+        <h3 class="text-primary-subtitle mb-3">Tarifas de Servicios</h3>
         <table id="fees" class="table table-striped table-hover">
             <thead>
                 <tr>
-            <th>Descripción del servicio</th>
-            <th>Costo base</th>
-            <th>Especialidad</th>
-            <th>Estatus</th>
-            <th>Acciones</th>
+                    <th>Descripción del servicio</th>
+                    <th>Costo base</th>
+                    <th>Especialidad</th>
+                    <th>Estatus</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -58,17 +137,17 @@
                 <td data-field = 'Especialidad' contenteditable = 'true'><?= $fee['NombreEspecialidad']?></td>
                 <td><? if($fee['Estatus'] == 1){ ?><span class="fa-solid fa-circle"></span><? }else {?><span class="fa-regular fa-circle"></span><?}?></td>
                 <td>
+                    <a href="feeDetails.php?id=<?= $fee['IdTarifa'] ?>" class="fa-solid fa-eye btn-secondary me-2 icon-btn"></a>
                     <button class="fa-solid fa-trash btn-secondary deleteBtn"></button>
                 </td>
                 </tr>
-                <?php endforeach; ?>
+            <?php endforeach; ?>
             </tbody>
         </table>
 
-
         <form action="../../../app/models/Fees/createFee.php" method="post">
-        <button type="submit" id = "createFee" class = "btn-primary"><i class="fa-solid fa-plus"></i>Crear tarifa</button>
-
+            <button type="submit" id = "createFee" class = "btn-primary"><i class="fa-solid fa-plus"></i>Crear tarifa</button>
+        </form>
 
     </div>
 

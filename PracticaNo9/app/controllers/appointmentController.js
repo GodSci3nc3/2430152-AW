@@ -9,11 +9,11 @@ if (createAppointmentBtn) {
         const appointmentDate = document.getElementById('appointmentDate').value;
 
         if (!patientId || !doctorId || !appointmentDate) {
-            let message = document.getElementById('systemResponse');
-            message.textContent = 'Complete los campos requeridos';
-            message.classList.add('active');
+            alert('Complete los campos requeridos');
             return;
         }
+
+        const formattedDate = appointmentDate.replace('T', ' ') + ':00';
 
         $.ajax({
             url: '../../../app/models/Appointments/createAppointment.php',
@@ -21,21 +21,20 @@ if (createAppointmentBtn) {
             data: {
                 patientId: patientId,
                 doctorId: doctorId,
-                appointmentDate: appointmentDate,
+                appointmentDate: formattedDate,
                 reason: 'General consultation'
             },
-            success: function() {
-                let message = document.getElementById('systemResponse');
-                message.textContent = 'Cita creada exitosamente';
-                message.classList.add('active');
-                setTimeout(() => {
+            success: function(response) {
+                const data = JSON.parse(response);
+                
+                if (data.success) {
                     location.reload();
-                }, 1500);
+                } else {
+                    alert(data.message || 'Error al crear cita');
+                }
             },
             error: function() {
-                let message = document.getElementById('systemResponse');
-                message.textContent = 'Error al crear cita';
-                message.classList.add('active');
+                alert('Error al crear cita');
             }
         })
     })
@@ -78,14 +77,9 @@ deleteAppointmentBtn.forEach(deleteButton => {
             },
             success: function() {
                 appointment.remove();
-                let message = document.getElementById('systemResponse');
-                message.textContent = 'Cita eliminada exitosamente';
-                message.classList.add('active');
             },
             error: function() {
-                let message = document.getElementById('systemResponse');
-                message.textContent = 'Error al eliminar cita';
-                message.classList.add('active');
+                alert('Error al eliminar cita');
             }
         })
     })

@@ -3,7 +3,7 @@
         'name' => 'arthur/practica-no9',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'cd192e4359ded1298a006cfb5e902fecbe87b231',
+        'reference' => '8e96ee2a6b4638ab8c76e516df7707f168cf42bd',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'arthur/practica-no9' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'cd192e4359ded1298a006cfb5e902fecbe87b231',
+            'reference' => '8e96ee2a6b4638ab8c76e516df7707f168cf42bd',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

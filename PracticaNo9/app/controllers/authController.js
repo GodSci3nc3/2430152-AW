@@ -3,6 +3,7 @@ const userData = document.querySelectorAll('td[contenteditable = "true"]')
 const deleteUserBtn = document.querySelectorAll('.deleteBtn')
 const registerUserBtn = document.getElementById('register')
 
+if (loginBtn) {
 loginBtn.addEventListener('click', function(e) {
     e.preventDefault();
 
@@ -36,9 +37,11 @@ loginBtn.addEventListener('click', function(e) {
 
         }
     })
-})
+});
+}
 
-registerUserBtn.addEventListener('click', function() {
+if (registerUserBtn) {
+registerUserBtn.addEventListener('click', function(e) {
     e.preventDefault();
 
     const username = document.getElementById('registerUsername').value;
@@ -56,8 +59,8 @@ registerUserBtn.addEventListener('click', function() {
             rol: rol
         }
     })
-})
-
+});
+}
 
 userData.forEach(data => {
     data.addEventListener('blur', function() {

@@ -14,7 +14,9 @@ try {
     $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
     $pdo = new PDO($dsn, $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+    
+    // Establecer zona horaria de México (CST/CDT)
+    $pdo->exec("SET time_zone = '-06:00'");
 
 } catch (PDOException $e) {
     echo 'Ha ocurrido un error, no se ha podido conectar con la base de datos';

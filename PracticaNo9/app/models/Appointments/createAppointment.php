@@ -1,12 +1,8 @@
 <?php
 include '../../../config/connectDatabase.php';
+require_once 'validateAppointment.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $sql = "INSERT INTO Citas 
-            (IdPaciente, IdMedico, FechaCita, MotivoConsulta, EstadoCita, Observaciones)
-            VALUES 
-            (:patientId, :doctorId, :appointmentDate, :reason, :status, :notes)";
 
     $patientId = $_POST['patientId'];
     $doctorId = $_POST['doctorId'];
@@ -14,6 +10,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $reason = $_POST['reason'] ?? 'General consultation';
     $status = 'scheduled';
     $notes = $_POST['notes'] ?? '';
+
+    $validation = validateAppointmentSchedule($pdo, $doctorId, $appointmentDate);
+    
+    if (!$validation['valid']) {
+        echo json_encode([
+            'success' => false,
+            'message' => $validation['message']
+        ]);
+        exit;
+    }
+
+    $sql = "INSERT INTO Citas 
+            (IdPaciente, IdMedico, FechaCita, MotivoConsulta, EstadoCita, Observaciones)
+            VALUES 
+            (:patientId, :doctorId, :appointmentDate, :reason, :status, :notes)";
 
     $stmt = $pdo->prepare($sql);
     

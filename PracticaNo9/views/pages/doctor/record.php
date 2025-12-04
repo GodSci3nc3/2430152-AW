@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+require_once '../../../app/helpers/permissions.php';
 
 if(!isset($_SESSION['username'])){
     Header('Location: ../login.php');
@@ -9,6 +10,8 @@ if(!isset($_SESSION['username'])){
         Header('Location: /PracticaNo9/views/components/404.html');
     }
 }
+
+checkPermission('expedientes');
 
 $idPaciente = $_GET['id'] ?? null;
 if (!$idPaciente) {
@@ -57,37 +60,136 @@ if (!$idPaciente) {
         $records = getRecordsByPatient($idPaciente);
         ?>
 
-        <h1 class="text-primary-title mb-4">Expediente médico - <?= $patient['NombreCompleto'] ?></h1>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="text-primary-title mb-0">Expediente médico - <?= $patient['NombreCompleto'] ?></h1>
+            <div>
+                <a href="../../../app/models/Reports/generatePDF.php?id=<?= $idPaciente ?>" class="btn-primary me-2">
+                    <i class="fa-solid fa-file-pdf"></i> Generar PDF
+                </a>
+                <a href="../../../app/models/Reports/generateExcel.php?id=<?= $idPaciente ?>" class="btn-secondary">
+                    <i class="fa-solid fa-file-excel"></i> Generar Excel
+                </a>
+            </div>
+        </div>
 
         <div class="row mb-4">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Información del paciente</h5>
-                        <p><strong>CURP:</strong> <?= $patient['CURP'] ?></p>
-                        <p><strong>Fecha de nacimiento:</strong> <?= $patient['FechaNacimiento'] ?></p>
-                        <p><strong>Sexo:</strong> <?= $patient['Sexo'] ?></p>
-                        <p><strong>Teléfono:</strong> <?= $patient['Telefono'] ?></p>
-                        <p><strong>Correo:</strong> <?= $patient['CorreoElectronico'] ?></p>
-                        <p><strong>Dirección:</strong> <?= $patient['Direccion'] ?></p>
+                        <h5 class="text-primary-subtitle">Información personal</h5>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Nombre completo</label>
+                            <input type="text" class="form-control patient-field" data-field="NombreCompleto" value="<?= $patient['NombreCompleto'] ?>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">CURP</label>
+                            <input type="text" class="form-control patient-field" data-field="CURP" value="<?= $patient['CURP'] ?>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Fecha de nacimiento</label>
+                            <input type="date" class="form-control patient-field" data-field="FechaNacimiento" value="<?= $patient['FechaNacimiento'] ?>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Sexo</label>
+                            <select class="form-control patient-field" data-field="Sexo">
+                                <option value="M" <?php if($patient['Sexo'] == 'M') { echo 'selected'; } ?>>Masculino</option>
+                                <option value="F" <?php if($patient['Sexo'] == 'F') { echo 'selected'; } ?>>Femenino</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Teléfono</label>
+                            <input type="text" class="form-control patient-field" data-field="Telefono" value="<?= $patient['Telefono'] ?>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control patient-field" data-field="CorreoElectronico" value="<?= $patient['CorreoElectronico'] ?>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Dirección</label>
+                            <textarea class="form-control patient-field" data-field="Direccion" rows="2"><?= $patient['Direccion'] ?></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Información médica</h5>
-                        <p><strong>Contacto de emergencia:</strong> <?= $patient['ContactoEmergencia'] ?></p>
-                        <p><strong>Teléfono emergencia:</strong> <?= $patient['TelefonoEmergencia'] ?></p>
-                        <p><strong>Alergias:</strong> <?= $patient['Alergias'] ?></p>
-                        <p><strong>Antecedentes médicos:</strong> <?= $patient['AntecedentesMedicos'] ?></p>
+                        <h5 class="text-primary-subtitle">Información de emergencia</h5>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Contacto de emergencia</label>
+                            <input type="text" class="form-control patient-field" data-field="ContactoEmergencia" value="<?= $patient['ContactoEmergencia'] ?>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Teléfono de emergencia</label>
+                            <input type="text" class="form-control patient-field" data-field="TelefonoEmergencia" value="<?= $patient['TelefonoEmergencia'] ?>">
+                        </div>
+
+                        <h5 class="text-primary-subtitle mt-4">Información médica</h5>
+
+                        <div class="mb-3">
+                            <label class="form-label">Alergias</label>
+                            <textarea class="form-control patient-field" data-field="Alergias" rows="2"><?= $patient['Alergias'] ?></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Antecedentes médicos</label>
+                            <textarea class="form-control patient-field" data-field="AntecedentesMedicos" rows="3"><?= $patient['AntecedentesMedicos'] ?></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row mb-4">
-            <div class="col">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h3 class="text-primary-subtitle mb-3">Citas programadas</h3>
+                <?php
+                require_once '../../../app/models/Appointments/getAppointments.php';
+                $appointments = getAppointments();
+                $patientAppointments = array_filter($appointments, function($apt) use ($idPaciente) {
+                    return $apt['IdPaciente'] == $idPaciente;
+                });
+                ?>
+                <?php if (empty($patientAppointments)): ?>
+                    <p class="text-primary-p">No hay citas programadas para este paciente.</p>
+                <?php else: ?>
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Médico</th>
+                                    <th>Estado</th>
+                                    <th>Motivo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($patientAppointments as $apt): ?>
+                                    <tr>
+                                        <td><?= $apt['FechaCita'] ?></td>
+                                        <td><?= $apt['DoctorName'] ?></td>
+                                        <td><?= $apt['EstadoCita'] ?></td>
+                                        <td><?= $apt['MotivoConsulta'] ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
                 <h3 class="text-primary-subtitle">Nueva consulta</h3>
                 <div class="row">
                     <div class="col-md-6 mb-3">
@@ -183,5 +285,37 @@ if (!$idPaciente) {
     </div>
 
     <script src="../../../app/controllers/recordController.js"></script>
+    <script>
+    const patientId = <?= $idPaciente ?>;
+    const message = document.getElementById('systemResponse');
+
+    document.querySelectorAll('.patient-field').forEach(field => {
+        field.addEventListener('change', function() {
+            const column = this.dataset.field;
+            const value = this.value;
+
+            $.ajax({
+                url: '../../../app/models/Patients/updatePatient.php',
+                type: 'POST',
+                data: {
+                    idPatient: patientId,
+                    column: column,
+                    change: value
+                },
+                success: function() {
+                    message.textContent = 'Cambio guardado';
+                    message.classList.add('active');
+                    setTimeout(() => {
+                        message.classList.remove('active');
+                    }, 2000);
+                },
+                error: function() {
+                    message.textContent = 'Error al guardar';
+                    message.classList.add('active');
+                }
+            });
+        });
+    });
+    </script>
 </body>
 </html>

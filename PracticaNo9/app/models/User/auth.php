@@ -4,7 +4,9 @@
     
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $sql = "SELECT Usuario, ContrasenaHash, Rol, IdMedico FROM Usuarios WHERE Usuario = :username";
+        $sql = "SELECT Usuario, ContrasenaHash, Rol, IdMedico, 
+                       PermisoPacientes, PermisoCitas, PermisoExpedientes, PermisoTarifas 
+                FROM Usuarios WHERE Usuario = :username";
         $stmt = $pdo->prepare($sql);
 
         $stmt->bindParam(':username', $username);
@@ -17,6 +19,10 @@
                 $_SESSION['username'] = $response['Usuario'];
                 $_SESSION['rol'] = $response['Rol'];
                 $_SESSION['idMedico'] = $response['IdMedico'];
+                $_SESSION['permisoPacientes'] = $response['PermisoPacientes'] ?? 1;
+                $_SESSION['permisoCitas'] = $response['PermisoCitas'] ?? 1;
+                $_SESSION['permisoExpedientes'] = $response['PermisoExpedientes'] ?? 1;
+                $_SESSION['permisoTarifas'] = $response['PermisoTarifas'] ?? 0;
                 switch($response['Rol']) {
                     case 'admin': 
                         echo json_encode(['success' => true, 'redirect' => 'admin/dashboard_admin.php']);

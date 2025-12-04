@@ -35,17 +35,28 @@ CREATE TABLE Medicos (
     FOREIGN KEY (EspecialidadId) REFERENCES Especialidades(IdEspecialidad)
 );
 
+CREATE TABLE Tarifas (
+    IdTarifa INT AUTO_INCREMENT PRIMARY KEY,
+    DescripcionServicio VARCHAR(150),
+    CostoBase DECIMAL(10,2),
+    EspecialidadId INT NULL,
+    Estatus BOOLEAN DEFAULT 1,
+    FOREIGN KEY (EspecialidadId) REFERENCES Especialidades(IdEspecialidad) ON DELETE RESTRICT
+);
+
 CREATE TABLE Citas (
     IdCita INT AUTO_INCREMENT PRIMARY KEY,
     IdPaciente INT,
     IdMedico INT,
     FechaCita DATETIME,
     MotivoConsulta VARCHAR(250),
+    IdTarifa INT NULL,
     EstadoCita VARCHAR(20),
     Observaciones VARCHAR(250),
     FechaRegistro DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (IdPaciente) REFERENCES Pacientes(IdPaciente) ON DELETE RESTRICT,
-    FOREIGN KEY (IdMedico) REFERENCES Medicos(IdMedico) ON DELETE RESTRICT
+    FOREIGN KEY (IdMedico) REFERENCES Medicos(IdMedico) ON DELETE RESTRICT,
+    FOREIGN KEY (IdTarifa) REFERENCES Tarifas(IdTarifa) ON DELETE SET NULL
 );
 
 CREATE TABLE Expedientes (
@@ -63,26 +74,19 @@ CREATE TABLE Expedientes (
     FOREIGN KEY (IdMedico) REFERENCES Medicos(IdMedico) ON DELETE RESTRICT
 );
 
-CREATE TABLE Tarifas (
-    IdTarifa INT AUTO_INCREMENT PRIMARY KEY,
-    DescripcionServicio VARCHAR(150),
-    CostoBase DECIMAL(10,2),
-    EspecialidadId INT NULL,
-    Estatus BOOLEAN DEFAULT 1,
-    FOREIGN KEY (EspecialidadId) REFERENCES Especialidades(IdEspecialidad) ON DELETE RESTRICT
-);
-
 CREATE TABLE Pagos (
     IdPago INT AUTO_INCREMENT PRIMARY KEY,
     IdCita INT,
     IdPaciente INT,
+    IdTarifa INT NULL,
     Monto DECIMAL(10,2),
     MetodoPago VARCHAR(50),
     FechaPago DATETIME DEFAULT CURRENT_TIMESTAMP,
     Referencia VARCHAR(100),
     EstatusPago VARCHAR(20),
     FOREIGN KEY (IdCita) REFERENCES Citas(IdCita) ON DELETE RESTRICT,
-    FOREIGN KEY (IdPaciente) REFERENCES Pacientes(IdPaciente) ON DELETE RESTRICT
+    FOREIGN KEY (IdPaciente) REFERENCES Pacientes(IdPaciente) ON DELETE RESTRICT,
+    FOREIGN KEY (IdTarifa) REFERENCES Tarifas(IdTarifa) ON DELETE SET NULL
 );
 
 CREATE TABLE Reportes (
@@ -106,6 +110,10 @@ CREATE TABLE Usuarios (
     Rol VARCHAR(50),
     IdMedico INT NULL,
     Activo BOOLEAN DEFAULT 1,
+    PermisoPacientes BOOLEAN DEFAULT 1,
+    PermisoCitas BOOLEAN DEFAULT 1,
+    PermisoExpedientes BOOLEAN DEFAULT 1,
+    PermisoTarifas BOOLEAN DEFAULT 0,
     UltimoAcceso DATETIME,
     FOREIGN KEY (IdMedico) REFERENCES Medicos(IdMedico) ON DELETE CASCADE
 );

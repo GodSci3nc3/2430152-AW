@@ -1,14 +1,17 @@
 <?php
 
 session_start();
+require_once '../../../app/helpers/permissions.php';
 
 if(!isset($_SESSION['username'])){
     Header('Location: ../login.php');
 } else {
-    if($_SESSION['rol'] != 'receptionist' && $_SESSION['rol'] != 'admin'){
+    if($_SESSION['rol'] != 'receptionist' && $_SESSION['rol'] != 'admin' && $_SESSION['rol'] != 'doctor'){
         Header('Location: /PracticaNo9/views/components/404.html');
     }
 }
+
+checkPermission('citas');
 
 ?>
 <!DOCTYPE html>
@@ -22,15 +25,9 @@ if(!isset($_SESSION['username'])){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../styles/globalStyles.css">
-
-    <script src="https://kit.fontawesome.com/aad8366bcb.js" crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://kit.fontawesome.com/aad8366bcb.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -47,10 +44,6 @@ if(!isset($_SESSION['username'])){
 
     <div class="container-fluid p-5">
         <h1 class="text-primary-title mb-4">Citas médicas en Medicore</h1>
-
-        <div class="systemResponse text-center mb-3">
-            <p class="systemResponse disabled" id="systemResponse">Respuesta del sistema</p>
-        </div>
 
         <div class="row mb-4">
             <div class="col-md-3">
@@ -109,6 +102,7 @@ if(!isset($_SESSION['username'])){
                 <td data-field='MotivoConsulta' contenteditable='true'><?= $appointment['MotivoConsulta'] ?></td>
                 <td data-field='EstadoCita' contenteditable='true'><?= $appointment['EstadoCita'] ?></td>
                 <td>
+                    <a href="appointmentDetails.php?id=<?= $appointment['IdCita'] ?>" class="fa-solid fa-circle-info btn-secondary me-2 icon-btn"></a>
                     <button class="fa-solid fa-trash btn-secondary deleteBtn"></button>
                 </td>
                 </tr>
@@ -123,6 +117,9 @@ if(!isset($_SESSION['username'])){
     </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     <script src="../../js/appointments.js"></script>
     <script src="../../../app/controllers/appointmentController.js"></script>
 </body>

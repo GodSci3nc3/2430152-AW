@@ -26,11 +26,13 @@
                     </li>
                     <?php endif; ?>
 
-                    <!-- Patients - Doctor, Admin and Receptionist -->
+                    <!-- Patients - Doctor, Admin and Receptionist with permission -->
                     <?php if (isset($_SESSION['rol']) && ($_SESSION['rol'] == 'admin' || $_SESSION['rol'] == 'doctor' || $_SESSION['rol'] == 'receptionist')): ?>
+                        <?php if (!isset($_SESSION['permisoPacientes']) || $_SESSION['permisoPacientes'] == 1): ?>
                     <li class="nav-item pt-3">
                         <a href="/PracticaNo9/views/pages/doctor/patients.php" class="nav-link"><i class="fa-solid fa-hospital-user"></i>Pacientes</a>
                     </li>
+                        <?php endif; ?>
                     <?php endif; ?>
 
                     <!-- Doctors - Admin only -->
@@ -54,24 +56,28 @@
                     </li>
                     <?php endif; ?>
 
-                    <!-- Appointments - Receptionist and Admin -->
-                    <?php if (isset($_SESSION['rol']) && ($_SESSION['rol'] == 'admin' || $_SESSION['rol'] == 'receptionist')): ?>
+                    <!-- Appointments - Receptionist, Admin and Doctor with permission -->
+                    <?php if (isset($_SESSION['rol']) && ($_SESSION['rol'] == 'admin' || $_SESSION['rol'] == 'receptionist' || $_SESSION['rol'] == 'doctor')): ?>
+                        <?php if (!isset($_SESSION['permisoCitas']) || $_SESSION['permisoCitas'] == 1): ?>
                     <li class="nav-item pt-3">
                         <a href="/PracticaNo9/views/pages/receptionist/appointments.php" class="nav-link"><i class="fa-solid fa-calendar-check"></i>Citas médicas</a>
                     </li>
+                        <?php endif; ?>
                     <?php endif; ?>
 
-                    <!-- Fees and Payments - Receptionist and Admin -->
+                    <!-- Fees and Payments - Receptionist and Admin with permission -->
                     <?php if (isset($_SESSION['rol']) && ($_SESSION['rol'] == 'admin' || $_SESSION['rol'] == 'receptionist')): ?>
+                        <?php if (!isset($_SESSION['permisoTarifas']) || $_SESSION['permisoTarifas'] == 1): ?>
                     <li class="nav-item pt-3">
                         <a href="/PracticaNo9/views/pages/receptionist/fees_and_payments.php" class="nav-link"><i class="fa-solid fa-credit-card"></i>Pagos y tarifas</a>
                     </li>
+                        <?php endif; ?>
                     <?php endif; ?>
 
                     <!-- Reports - Admin only -->
                     <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 'admin'): ?>
                     <li class="nav-item pt-3">
-                        <a href="#" class="nav-link"><i class="fa-solid fa-chart-bar"></i>Reportes</a>
+                        <a href="/PracticaNo9/views/pages/admin/reports.php" class="nav-link"><i class="fa-solid fa-chart-bar"></i>Reportes</a>
                     </li>
                     <?php endif; ?>
 

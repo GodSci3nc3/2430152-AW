@@ -4,9 +4,9 @@
     function getUsers () {
     global $pdo;
 
-
-
-        $sql = "SELECT IdUsuario, Usuario, CorreoElectronico, Rol, Activo FROM Usuarios";
+        $sql = "SELECT IdUsuario, Usuario, CorreoElectronico, Rol, Activo, 
+                       PermisoPacientes, PermisoCitas, PermisoExpedientes, PermisoTarifas 
+                FROM Usuarios";
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute();

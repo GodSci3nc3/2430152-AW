@@ -4,7 +4,7 @@
     function getAppointments() {
         global $pdo;
 
-        $sql = "SELECT c.IdCita, p.NombreCompleto as PatientName, m.NombreCompleto as DoctorName, 
+        $sql = "SELECT c.IdCita, c.IdPaciente, c.IdMedico, p.NombreCompleto as PatientName, m.NombreCompleto as DoctorName, 
                        c.FechaCita, c.MotivoConsulta, c.EstadoCita 
                 FROM Citas c 
                 INNER JOIN Pacientes p ON c.IdPaciente = p.IdPaciente 

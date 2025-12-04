@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once '../../../app/helpers/permissions.php';
 
 if(!isset($_SESSION['username'])){
     Header('Location: ../login.php');
@@ -7,6 +8,7 @@ if(!isset($_SESSION['username'])){
     if($_SESSION['rol'] != 'doctor' && $_SESSION['rol'] != 'admin' && $_SESSION['rol'] != 'receptionist'){
         Header('Location: /PracticaNo9/views/components/404.html');
     }
+    checkPermission('pacientes');
 }
 ?>
 <!DOCTYPE html>
@@ -78,9 +80,7 @@ if(!isset($_SESSION['username'])){
                 <td><?= $paciente['FechaRegistro']?></td>
                 <td><? if($paciente['Estatus'] == 1){ ?><span class="fa-solid fa-circle"></span><? }else {?><span class="fa-regular fa-circle"></span><?}?></td>
                 <td>
-                    <a href="record.php?id=<?= $paciente['IdPaciente'] ?>" class="btn btn-sm btn-outline-primary me-2">
-                        <i class="fa-solid fa-file-medical"></i>
-                    </a>
+                    <a href="record.php?id=<?= $paciente['IdPaciente'] ?>" class="fa-solid fa-folder-open btn-secondary me-2 icon-btn"></a>
                     <button class="fa-solid fa-trash btn-secondary deleteBtn"></button>
                 </td>
                 </tr>

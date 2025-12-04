@@ -80,6 +80,7 @@ if(!isset($_SESSION['username'])){
                 <td data-field = 'Rol' contenteditable = 'true'><?= $user['Rol']?></td>
                 <td><? if($user['Activo'] == 1){ ?><span class="fa-solid fa-circle"></span><? }else {?><span class="fa-regular fa-circle"></span><?}?></td>
                 <td>
+                    <a href="userProfile.php?id=<?= $user['IdUsuario'] ?>" class="fa-solid fa-eye btn-secondary me-2 icon-btn"></a>
                     <button class="fa-solid fa-trash btn-secondary deleteBtn"></button>
                 </td>
                 </tr>
