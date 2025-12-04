@@ -1,0 +1,22 @@
+.sidebar ul {
+    list-style-type: none;
+
+}
+.btn-navigation {
+
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 9px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    transition: var(--transition);
+    width: 80%;
+    cursor: pointer;
+}
+
+.btn-navigation:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-1px);
+    color: var(--color-white);
+}

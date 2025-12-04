@@ -1,0 +1,29 @@
+services:
+  web:
+    build:
+      context: .
+    ports: 
+      - '80:80'
+    volumes:
+      - .:/var/www/html/
+
+  db: 
+
+    image: mysql:8.0.27
+    command: '--default-authentication-plugin=mysql_native_password'
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./PracticaNo9/config:/docker-entrypoint-initdb.d/
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=medicore_user
+      - MYSQL_PASSWORD=5oo6fXkf
+    expose:
+      - 3306
+      - 33060
+
+volumes:
+  db_data:
+  

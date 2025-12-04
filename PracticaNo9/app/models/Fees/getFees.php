@@ -1,0 +1,51 @@
+<?php
+    require_once __DIR__ . '/../../../config/connectDatabase.php';
+
+    function getFees () {
+    global $pdo;
+
+
+
+        $sql = "SELECT p.IdTarifa, p.DescripcionServicio, p.CostoBase, e.NombreEspecialidad, p.Estatus FROM Tarifas p INNER JOIN Especialidades e ON p.EspecialidadId = e.IdEspecialidad;";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+   
+        /*
+        
+        $stmt->bindParam(':nombre', $nombre);
+        $stmt->bindParam(':curp', $curp);
+        $stmt->bindParam(':fecha_nacimiento', $fecha_nacimiento);
+        $stmt->bindParam(':sexo', $sexo);
+        $stmt->bindParam(':telefono', $telefono);
+        $stmt->bindParam(':correo', $correo);
+        $stmt->bindParam(':direccion', $direccion);
+        $stmt->bindParam(':contacto_emergencia', $contacto_emergencia);
+        $stmt->bindParam(':telefono_emergencia', $telefono_emergencia);
+        $stmt->bindParam(':alergias', $alergias);
+        $stmt->bindParam(':antecedentes', $antecedentes);
+        */
+
+        /* 
+        $stmt->bindParam(':nombre', $_POST['nombre']);
+        $stmt->bindParam(':curp', $_POST['curp']);
+        $stmt->bindParam(':fecha_nacimiento', $_POST['fecha_nacimiento']);
+        $stmt->bindParam(':sexo', $_POST['sexo']);
+        $stmt->bindParam(':telefono', $_POST['telefono']);
+        $stmt->bindParam(':correo', $_POST['correo']);
+        $stmt->bindParam(':direccion', $_POST['direccion']);
+        $stmt->bindParam(':contacto_emergencia', $_POST['contacto_emergencia']);
+        $stmt->bindParam(':telefono_emergencia', $_POST['telefono_emergencia']);
+        $stmt->bindParam(':alergias', $_POST['alergias']);
+        $stmt->bindParam(':antecedentes', $_POST['antecedentes']);
+        */
+    
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+    }
+
+?>

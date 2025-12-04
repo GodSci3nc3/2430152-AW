@@ -1,0 +1,17 @@
+{
+    "name": "arthur/practica-no9",
+    "autoload": {
+        "psr-4": {
+            "Arthur\\PracticaNo9\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Arturo Rosales V",
+            "email": "rosalesvelazquezarturo@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

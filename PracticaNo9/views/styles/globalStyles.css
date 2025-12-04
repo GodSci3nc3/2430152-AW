@@ -53,6 +53,7 @@ body {
     
 }
 
+
 .btn-primary {
     background-color: var(--color-primary);
     border: none;
@@ -89,6 +90,7 @@ body {
 .btn-secondary:hover {
     transform: translateY(-3px);
 }
+
 
 .form-label {
     color: var(--color-text);
