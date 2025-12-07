@@ -9,7 +9,6 @@ if(!isset($_SESSION['username'])){
 
 checkPermission('tarifas');
 
-// Obtener pagos
 $paymentResult = json_decode(file_get_contents('http://localhost/PracticaNo9/app/models/Payments/getPayments.php'), true);
 ?>
 
@@ -51,7 +50,6 @@ $paymentResult = json_decode(file_get_contents('http://localhost/PracticaNo9/app
     <div class="container-fluid p-5">
         <h1 class="text-primary-title mb-4">Pagos y tarifas en Medicore</h1>
 
-        <!-- Sección de Pagos -->
         <h3 class="text-primary-subtitle mb-3">Pagos Generados</h3>
         <table id="paymentsTable" class="table table-striped table-hover">
             <thead>
@@ -68,52 +66,47 @@ $paymentResult = json_decode(file_get_contents('http://localhost/PracticaNo9/app
                 </tr>
             </thead>
             <tbody>
-            <?php
-            if ($paymentResult && $paymentResult['success']) {
-                foreach ($paymentResult['data'] as $pago) {
-                    $fecha = $pago['FechaCita'] ? date('d/m/Y H:i', strtotime($pago['FechaCita'])) : 'N/A';
-                    $servicio = $pago['DescripcionServicio'] ?? 'Consulta general';
-                    echo "<tr data-payment-id='{$pago['IdPago']}'>";
-                    echo "<td>{$pago['IdPago']}</td>";
-                    echo "<td>{$pago['NombrePaciente']}</td>";
-                    echo "<td>{$fecha}</td>";
-                    echo "<td>{$pago['NombreMedico']}</td>";
-                    echo "<td>{$pago['NombreEspecialidad']}</td>";
-                    echo "<td>{$servicio}</td>";
-                    echo "<td>$" . number_format($pago['Monto'], 2) . "</td>";
-                    echo "<td>";
-                    if ($pago['MetodoPago'] === 'Pendiente') {
-                        echo "<select class='form-select form-select-sm payment-method' data-id='{$pago['IdPago']}'>";
-                        echo "<option value='Pendiente' selected>Pendiente</option>";
-                        echo "<option value='Efectivo'>Efectivo</option>";
-                        echo "<option value='Tarjeta'>Tarjeta</option>";
-                        echo "<option value='Transferencia'>Transferencia</option>";
-                        echo "</select>";
-                    } else {
-                        echo $pago['MetodoPago'];
-                    }
-                    echo "</td>";
-                    echo "<td>";
-                    if ($pago['EstatusPago'] === 'pendiente') {
-                        echo "<select class='form-select form-select-sm payment-status' data-id='{$pago['IdPago']}'>";
-                        echo "<option value='pendiente' selected>Pendiente</option>";
-                        echo "<option value='pagado'>Pagado</option>";
-                        echo "<option value='cancelado'>Cancelado</option>";
-                        echo "</select>";
-                    } else {
-                        echo ucfirst($pago['EstatusPago']);
-                    }
-                    echo "</td>";
-                    echo "</tr>";
-                }
-            }
-            ?>
+            <?php if ($paymentResult && $paymentResult['success']): ?>
+                <?php foreach ($paymentResult['data'] as $pago): ?>
+                    <?php 
+                        $fecha = $pago['FechaCita'] ? date('d/m/Y H:i', strtotime($pago['FechaCita'])) : 'N/A';
+                        $servicio = $pago['DescripcionServicio'] ?? 'Consulta general';
+                    ?>
+                    <tr data-payment-id="<?= $pago['IdPago'] ?>">
+                        <td><?= $pago['IdPago'] ?></td>
+                        <td><?= $pago['NombrePaciente'] ?></td>
+                        <td><?= $fecha ?></td>
+                        <td><?= $pago['NombreMedico'] ?></td>
+                        <td><?= $pago['NombreEspecialidad'] ?></td>
+                        <td><?= $servicio ?></td>
+                        <td>$<?= number_format($pago['Monto'], 2) ?></td>
+                        <td>
+                            <?php if ($pago['MetodoPago'] === 'Pendiente'): ?>
+                                <select class="form-select form-select-sm payment-method" data-id="<?= $pago['IdPago'] ?>">
+                                    <option value="Pendiente" selected>Pendiente</option>
+                                    <option value="Efectivo">Efectivo</option>
+                                    <option value="Tarjeta">Tarjeta</option>
+                                    <option value="Transferencia">Transferencia</option>
+                                </select>
+                            <?php else: ?>
+                                <?= $pago['MetodoPago'] ?>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <select class="form-select form-select-sm payment-status" data-id="<?= $pago['IdPago'] ?>">
+                                <option value="pendiente" <?= $pago['EstatusPago'] === 'pendiente' ? 'selected' : '' ?>>Pendiente</option>
+                                <option value="pagado" <?= $pago['EstatusPago'] === 'pagado' ? 'selected' : '' ?>>Pagado</option>
+                                <option value="cancelado" <?= $pago['EstatusPago'] === 'cancelado' ? 'selected' : '' ?>>Cancelado</option>
+                            </select>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
             </tbody>
         </table>
 
         <hr class="my-5">
 
-        <!-- Sección de Tarifas -->
         <h3 class="text-primary-subtitle mb-3">Tarifas de Servicios</h3>
         <table id="fees" class="table table-striped table-hover">
             <thead>

@@ -7,9 +7,15 @@
     $change = $_POST['change'];
 
     /* Never trust on frontend. All coming from user will validate in backend */
-    $allowed_columns = ['NombreCompleto', 'Telefono', 'CorreoElectronico'];
+    $allowed_columns = [
+        'NombreCompleto', 'CURP', 'FechaNacimiento', 'Sexo', 
+        'Telefono', 'CorreoElectronico', 'Direccion',
+        'ContactoEmergencia', 'TelefonoEmergencia',
+        'Alergias', 'AntecedentesMedicos'
+    ];
 
         if (!in_array($column, $allowed_columns)) {
+            echo json_encode(['success' => false, 'message' => 'Columna no permitida']);
             exit();
         }
 
@@ -20,6 +26,8 @@
         $stmt->bindParam(':id', $patientId);
         $stmt->bindParam(':change', $change);
         $stmt->execute();
+        
+        echo json_encode(['success' => true]);
 
 
         /*

@@ -12,7 +12,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
              :prescription, :notes, :nextAppointment)";
 
     $patientId = $_POST['patientId'];
-    $doctorId = $_SESSION['idMedico'];
+    $doctorId = $_SESSION['idMedico'] ?? null;
+    
+    if (!$doctorId) {
+        $sqlCita = "SELECT IdMedico FROM Citas WHERE IdPaciente = :patientId ORDER BY FechaCita DESC LIMIT 1";
+        $stmtCita = $pdo->prepare($sqlCita);
+        $stmtCita->bindParam(':patientId', $patientId);
+        $stmtCita->execute();
+        $cita = $stmtCita->fetch(PDO::FETCH_ASSOC);
+        $doctorId = $cita['IdMedico'];
+    }
+    
     $consultDate = date('Y-m-d H:i:s');
     $symptoms = $_POST['symptoms'] ?? '';
     $diagnosis = $_POST['diagnosis'] ?? '';

@@ -50,10 +50,6 @@ if (!$idPaciente) {
 
     <div class="container-fluid p-5">
         
-        <div class="systemResponse">
-            <p id="systemResponse" class="systemResponse disabled">Respuesta del sistema</p>
-        </div>
-
         <?php
         require_once '../../../app/models/Records/getRecords.php';
         $patient = getPatientDetail($idPaciente);
@@ -287,7 +283,6 @@ if (!$idPaciente) {
     <script src="../../../app/controllers/recordController.js"></script>
     <script>
     const patientId = <?= $idPaciente ?>;
-    const message = document.getElementById('systemResponse');
 
     document.querySelectorAll('.patient-field').forEach(field => {
         field.addEventListener('change', function() {
@@ -303,15 +298,35 @@ if (!$idPaciente) {
                     change: value
                 },
                 success: function() {
-                    message.textContent = 'Cambio guardado';
-                    message.classList.add('active');
-                    setTimeout(() => {
-                        message.classList.remove('active');
-                    }, 2000);
+                    // Guardado silencioso
                 },
                 error: function() {
-                    message.textContent = 'Error al guardar';
-                    message.classList.add('active');
+                    alert('Error al guardar');
+                }
+            });
+        });
+    });
+
+    // Evento blur para campos contenteditable del historial
+    document.querySelectorAll('p[contenteditable="true"]').forEach(field => {
+        field.addEventListener('blur', function() {
+            const recordId = this.dataset.recordId;
+            const column = this.dataset.field;
+            const value = this.textContent.trim();
+
+            $.ajax({
+                url: '../../../app/models/Records/updateRecord.php',
+                type: 'POST',
+                data: {
+                    recordId: recordId,
+                    column: column,
+                    change: value
+                },
+                success: function() {
+                    // Guardado silencioso
+                },
+                error: function() {
+                    alert('Error al actualizar el registro');
                 }
             });
         });

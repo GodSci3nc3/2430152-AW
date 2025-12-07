@@ -121,6 +121,27 @@ $doctors = getDoctors();
                                 <label class="form-label">Motivo de consulta</label>
                                 <textarea class="form-control" rows="3" data-field="MotivoConsulta"><?= $appointment['MotivoConsulta'] ?></textarea>
                             </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Servicio adicional (opcional)</label>
+                                <select class="form-control" data-field="IdTarifa">
+                                    <option value="">Ninguno - Solo consulta ($500)</option>
+                                    <?php
+                                    require_once '../../../app/models/Fees/getFees.php';
+                                    $fees = getFees();
+                                    foreach($fees as $fee): 
+                                        if ($fee['Estatus'] == 1):
+                                    ?>
+                                        <option value="<?= $fee['IdTarifa'] ?>" <?php if($appointment['IdTarifa'] == $fee['IdTarifa']) { echo 'selected'; } ?>>
+                                            <?= $fee['DescripcionServicio'] ?> (+$<?= number_format($fee['CostoBase'], 2) ?>)
+                                        </option>
+                                    <?php 
+                                        endif;
+                                    endforeach; 
+                                    ?>
+                                </select>
+                                <small class="text-muted">Precio total: $500 (consulta) + servicio seleccionado</small>
+                            </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Observaciones</label>
@@ -317,7 +338,7 @@ $doctors = getDoctors();
             const notasConsulta = $('#notasConsulta').val();
 
             if (!diagnostico || !tratamiento) {
-                showSystemResponse('error', 'El diagnóstico y tratamiento son obligatorios');
+                alert('⚠️ El diagnóstico y tratamiento son obligatorios');
                 return;
             }
 
@@ -340,14 +361,15 @@ $doctors = getDoctors();
                 success: function(response) {
                     const data = JSON.parse(response);
                     if (data.success) {
-                        alert('Consulta registrada');
+                        alert('✅ Consulta registrada correctamente');
                         $('#diagnostico, #tratamiento, #presionArterial, #temperatura, #peso, #altura, #notasConsulta').val('');
+                        setTimeout(() => location.reload(), 500);
                     } else {
-                        alert(data.message || 'Error al registrar la consulta');
+                        alert('❌ ' + (data.message || 'Error al registrar la consulta'));
                     }
                 },
                 error: function() {
-                    alert('Error al registrar la consulta');
+                    alert('❌ Error de conexión al registrar la consulta');
                 }
             });
         });

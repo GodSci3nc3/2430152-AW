@@ -9,7 +9,7 @@ if (createAppointmentBtn) {
         const appointmentDate = document.getElementById('appointmentDate').value;
 
         if (!patientId || !doctorId || !appointmentDate) {
-            alert('Complete los campos requeridos');
+            showSystemResponse('error', 'Complete los campos requeridos');
             return;
         }
 
@@ -30,14 +30,33 @@ if (createAppointmentBtn) {
                 if (data.success) {
                     location.reload();
                 } else {
-                    alert(data.message || 'Error al crear cita');
+                    showSystemResponse('error', data.message || 'Error al crear cita');
                 }
             },
             error: function() {
-                alert('Error al crear cita');
+                showSystemResponse('error', 'Error al crear cita');
             }
         })
     })
+}
+
+function showSystemResponse(type, message) {
+    const responseBox = $('#system-response');
+    responseBox.removeClass('alert-success alert-danger alert-warning');
+    
+    if (type === 'success') {
+        responseBox.addClass('alert-success');
+    } else if (type === 'error') {
+        responseBox.addClass('alert-danger');
+    } else {
+        responseBox.addClass('alert-warning');
+    }
+    
+    responseBox.text(message).fadeIn();
+    
+    setTimeout(function() {
+        responseBox.fadeOut();
+    }, 3000);
 }
 
 appointmentData.forEach(data => {
@@ -79,7 +98,7 @@ deleteAppointmentBtn.forEach(deleteButton => {
                 appointment.remove();
             },
             error: function() {
-                alert('Error al eliminar cita');
+                showSystemResponse('error', 'Error al eliminar cita');
             }
         })
     })

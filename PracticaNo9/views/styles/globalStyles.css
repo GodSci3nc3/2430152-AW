@@ -132,6 +132,7 @@ body {
     max-width: 400px;
 }
 
+/* Icon buttons */
 .icon-btn {
     text-decoration: none;
     color: black;
@@ -143,6 +144,7 @@ body {
     text-align: center;
 }
 
+/* Permission checkboxes */
 .form-check-input {
     width: 1.2em;
     height: 1.2em;
@@ -173,6 +175,7 @@ body {
     color: var(--color-text-light);
 }
 
+/* Timeline styles */
 .timeline-border {
     border-color: var(--color-border);
 }

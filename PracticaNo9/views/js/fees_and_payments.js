@@ -29,9 +29,13 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function(response) {
-                if (response.success) {
+                if (!response.success) {
+                    alert('Error al actualizar');
                     location.reload();
                 }
+            },
+            error: function() {
+                alert('Error de conexión');
             }
         });
     });
@@ -51,9 +55,13 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function(response) {
-                if (response.success) {
+                if (!response.success) {
+                    alert('Error al actualizar');
                     location.reload();
                 }
+            },
+            error: function() {
+                alert('Error de conexión');
             }
         });
     });

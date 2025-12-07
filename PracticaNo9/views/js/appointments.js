@@ -11,6 +11,25 @@ $(document).ready(function() {
         ]
     });
 
+    function showSystemResponse(type, message) {
+        const responseBox = $('#system-response');
+        responseBox.removeClass('alert-success alert-danger alert-warning');
+        
+        if (type === 'success') {
+            responseBox.addClass('alert-success');
+        } else if (type === 'error') {
+            responseBox.addClass('alert-danger');
+        } else {
+            responseBox.addClass('alert-warning');
+        }
+        
+        responseBox.text(message).fadeIn();
+        
+        setTimeout(function() {
+            responseBox.fadeOut();
+        }, 3000);
+    }
+
     $('#appointments tbody').on('blur', 'td[contenteditable="true"]', function() {
         const cell = table.cell(this);
         const appointmentId = $(this).closest('tr').data('appointment-id');
@@ -46,11 +65,14 @@ $(document).ready(function() {
             success: function(response) {
                 const data = JSON.parse(response);
                 if (data.success && field === 'EstadoCita' && value === 'completed') {
-                    alert('Pago creado automáticamente');
-                    setTimeout(() => location.reload(), 1000);
+                    showSystemResponse('success', 'Pago creado automáticamente');
+                    setTimeout(() => location.reload(), 1500);
                 } else if (!data.success && data.message) {
-                    alert(data.message);
+                    showSystemResponse('error', data.message);
                 }
+            },
+            error: function() {
+                showSystemResponse('error', 'Error al actualizar');
             }
         });
     });

@@ -45,6 +45,8 @@ checkPermission('citas');
     <div class="container-fluid p-5">
         <h1 class="text-primary-title mb-4">Citas médicas en Medicore</h1>
 
+        <div id="system-response" class="alert system-response-box"></div>
+
         <div class="row mb-4">
             <div class="col-md-3">
                 <select class="form-control" id="selectPatient">

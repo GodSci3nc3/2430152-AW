@@ -58,23 +58,23 @@ $reportResult = json_decode(file_get_contents('http://localhost/PracticaNo9/app/
                             </tr>
                         </thead>
                         <tbody>
-                        <?php
-                        if ($reportResult && $reportResult['success']) {
-                            foreach ($reportResult['data'] as $reporte) {
-                                $icon = $reporte['TipoReporte'] === 'PDF' ? 'fa-file-pdf text-danger' : 'fa-file-excel text-success';
-                                $fecha = date('d/m/Y H:i', strtotime($reporte['FechaGeneracion']));
-                                echo "<tr>";
-                                echo "<td>{$reporte['IdReporte']}</td>";
-                                echo "<td><i class='fa-solid {$icon}'></i> {$reporte['TipoReporte']}</td>";
-                                echo "<td>{$reporte['NombrePaciente']}</td>";
-                                echo "<td>{$reporte['Descripcion']}</td>";
-                                echo "<td>{$fecha}</td>";
-                                echo "<td>{$reporte['GeneradoPor']}</td>";
-                                echo "<td><button class='btn-icon-delete' onclick='deleteReport({$reporte['IdReporte']})'><i class='fa-solid fa-trash'></i></button></td>";
-                                echo "</tr>";
-                            }
-                        }
-                        ?>
+                        <?php if ($reportResult && $reportResult['success']): ?>
+                            <?php foreach ($reportResult['data'] as $reporte): ?>
+                                <?php 
+                                    $icon = $reporte['TipoReporte'] === 'PDF' ? 'fa-file-pdf text-danger' : 'fa-file-excel text-success';
+                                    $fecha = date('d/m/Y H:i', strtotime($reporte['FechaGeneracion']));
+                                ?>
+                                <tr>
+                                    <td><?= $reporte['IdReporte'] ?></td>
+                                    <td><i class="fa-solid <?= $icon ?>"></i> <?= $reporte['TipoReporte'] ?></td>
+                                    <td><?= $reporte['NombrePaciente'] ?></td>
+                                    <td><?= $reporte['Descripcion'] ?></td>
+                                    <td><?= $fecha ?></td>
+                                    <td><?= $reporte['GeneradoPor'] ?></td>
+                                    <td><button class="btn-icon-delete" onclick="deleteReport(<?= $reporte['IdReporte'] ?>)"><i class="fa-solid fa-trash"></i></button></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                         </tbody>
                     </table>
 
