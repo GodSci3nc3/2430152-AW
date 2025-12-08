@@ -1,4 +1,3 @@
-
 CREATE TABLE Pacientes (
     IdPaciente INT AUTO_INCREMENT PRIMARY KEY,
     NombreCompleto VARCHAR(150),
@@ -109,13 +108,15 @@ CREATE TABLE Usuarios (
     ContrasenaHash VARCHAR(200),
     Rol VARCHAR(50),
     IdMedico INT NULL,
+    IdMedicoAsignado INT NULL,
     Activo BOOLEAN DEFAULT 1,
     PermisoPacientes BOOLEAN DEFAULT 1,
     PermisoCitas BOOLEAN DEFAULT 1,
     PermisoExpedientes BOOLEAN DEFAULT 1,
     PermisoTarifas BOOLEAN DEFAULT 0,
     UltimoAcceso DATETIME,
-    FOREIGN KEY (IdMedico) REFERENCES Medicos(IdMedico) ON DELETE CASCADE
+    FOREIGN KEY (IdMedico) REFERENCES Medicos(IdMedico) ON DELETE CASCADE,
+    FOREIGN KEY (IdMedicoAsignado) REFERENCES Medicos(IdMedico) ON DELETE SET NULL
 );
 
 CREATE TABLE Bitacora (
