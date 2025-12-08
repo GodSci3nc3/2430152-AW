@@ -11,14 +11,42 @@
     const linesGraph = document.getElementById('monthIncomes');
     const barGraph = document.getElementById('topSpecialty');
 
+  // Preparar datos de ingresos mensuales
+  const mesesMap = {
+    '01': 'Enero', '02': 'Febrero', '03': 'Marzo', '04': 'Abril',
+    '05': 'Mayo', '06': 'Junio', '07': 'Julio', '08': 'Agosto',
+    '09': 'Septiembre', '10': 'Octubre', '11': 'Noviembre', '12': 'Diciembre'
+  };
+
+  // Crear array con los últimos 6 meses
+  const hoy = new Date();
+  const labelsIngresos = [];
+  const dataIngresos = [];
+  
+  for (let i = 5; i >= 0; i--) {
+    const fecha = new Date(hoy.getFullYear(), hoy.getMonth() - i, 1);
+    const mesKey = String(fecha.getMonth() + 1).padStart(2, '0');
+    const mesAno = `${fecha.getFullYear()}-${mesKey}`;
+    
+    labelsIngresos.push(mesesMap[mesKey]);
+    
+    // Buscar si hay datos para este mes
+    const datoMes = ingresosMensuales.find(item => item.mes === mesAno);
+    dataIngresos.push(datoMes ? parseFloat(datoMes.total) : 0);
+  }
+
+  // Preparar datos de ingresos por especialidad
+  const labelsEspecialidades = ingresosPorEspecialidad.map(item => item.NombreEspecialidad);
+  const dataEspecialidades = ingresosPorEspecialidad.map(item => parseFloat(item.totalIngresos));
+
   //Ingresos mensuales
 new Chart(linesGraph, {
   type: 'line',
   data: {
-    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Junio', 'Julio'],
+    labels: labelsIngresos,
     datasets: [{
       label: 'Ingresos mensuales $',
-      data: [12, 19, 3, 5, 2, 3],
+      data: dataIngresos,
       borderColor: '#333',
       backgroundColor: 'rgba(51, 51, 51, 0.1)',
       borderWidth: 2,
@@ -79,10 +107,10 @@ new Chart(linesGraph, {
 new Chart(barGraph, {
   type: 'bar',
   data: {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: labelsEspecialidades,
     datasets: [{
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
+      label: 'Ingresos $',
+      data: dataEspecialidades,
       backgroundColor: '#333',
       borderColor: '#333',
       borderRadius: 4

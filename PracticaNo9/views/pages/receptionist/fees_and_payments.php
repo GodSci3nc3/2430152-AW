@@ -24,15 +24,8 @@ $paymentResult = json_decode(file_get_contents('http://localhost/PracticaNo9/app
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../styles/globalStyles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script src="https://kit.fontawesome.com/aad8366bcb.js" crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://kit.fontawesome.com/aad8366bcb.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -148,8 +141,11 @@ $paymentResult = json_decode(file_get_contents('http://localhost/PracticaNo9/app
 
     </div>
     </div>
-    
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     <script src="../../js/fees_and_payments.js"></script>
     <script src="../../../app/controllers/fees_and_paymentController.js"></script>
 </body>

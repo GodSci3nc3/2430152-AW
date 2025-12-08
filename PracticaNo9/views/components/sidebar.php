@@ -74,6 +74,20 @@
                         <?php endif; ?>
                     <?php endif; ?>
 
+                    <!-- Medical Agenda - Doctor only -->
+                    <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 'doctor'): ?>
+                    <li class="nav-item pt-3">
+                        <a href="/PracticaNo9/views/pages/doctor/agenda.php" class="nav-link"><i class="fa-solid fa-clipboard-list"></i>Agenda médica</a>
+                    </li>
+                    <?php endif; ?>
+
+                    <!-- My Receptionist - Doctor only -->
+                    <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 'doctor'): ?>
+                    <li class="nav-item pt-3">
+                        <a href="/PracticaNo9/views/pages/doctor/receptionistProfile.php" class="nav-link"><i class="fa-solid fa-user-nurse"></i>Mi recepcionista</a>
+                    </li>
+                    <?php endif; ?>
+
                     <!-- Reports - Admin only -->
                     <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 'admin'): ?>
                     <li class="nav-item pt-3">
@@ -86,11 +100,6 @@
                 <hr>
 
                 <ul>
-                    <!-- Settings - All roles -->
-                    <li class="nav-item mb-3">
-                        <a href="#" class="nav-link"><i class="fa-solid fa-gear"></i>Configuración</a>
-                    </li>
-                    
                     <!-- Logout - All roles -->
                     <li class="nav-item">
                         <a href="#" id="logout" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i>Cerrar sesión</a>

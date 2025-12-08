@@ -11,6 +11,20 @@ if(!isset($_SESSION['username'])){
     }
 }
 
+require_once '../../../app/models/Dashboard/getTotalIngresos.php';
+require_once '../../../app/models/Dashboard/getIngresosPorEspecialidad.php';
+require_once '../../../app/models/Dashboard/getIngresosMensuales.php';
+require_once '../../../app/models/Dashboard/getGastos.php';
+
+$totalIngresos = getTotalIngresos();
+$gastos = getGastos($totalIngresos);
+$utilidad = $totalIngresos - $gastos['total'];
+$ingresosPorEspecialidad = getIngresosPorEspecialidad();
+$ingresosMensuales = getIngresosMensuales();
+
+// Debug: verificar datos
+error_log("Ingresos mensuales: " . json_encode($ingresosMensuales));
+
 ?>
 
 <!DOCTYPE html>
@@ -55,18 +69,22 @@ if(!isset($_SESSION['username'])){
             <div class="row text-center justify-content-center">
                 <div class="row">
                     <div class="col">
-                        <h3 class="text-primary-subtitle">Ingresos</h3>
-                        <p class="text-primary-p">$12,356</p>
+                        <h3 class="text-primary-subtitle">Ingresos totales</h3>
+                        <p class="text-primary-p">$<?php echo number_format($totalIngresos, 2); ?></p>
                     </div>
 
                     <div class="col">
-                        <h3 class="text-primary-subtitle">Gastos </h3>
-                        <p class="text-primary-p">$12,356</p>
+                        <h3 class="text-primary-subtitle">Gastos</h3>
+                        <p class="text-primary-p">$<?php echo number_format($gastos['total'], 2); ?></p>
+                        <small class="text-muted">Fijos: $<?php echo number_format($gastos['fijos'], 2); ?> | Variables: $<?php echo number_format($gastos['variables'], 2); ?></small>
                     </div>
                     
                     <div class="col">
                         <h3 class="text-primary-subtitle">Utilidad o pérdida</h3>
-                        <p class="text-primary-p">92%</p>
+                        <p class="text-primary-p" style="color: <?php echo $utilidad >= 0 ? '#28a745' : '#dc3545'; ?>">
+                            <?php echo $utilidad >= 0 ? '+' : ''; ?>$<?php echo number_format($utilidad, 2); ?>
+                        </p>
+                        <small class="text-muted"><?php echo $utilidad >= 0 ? 'Utilidad' : 'Pérdida'; ?></small>
                     </div>
 
                 <div class="row align-items-center graph">
@@ -92,6 +110,13 @@ if(!isset($_SESSION['username'])){
         </div>
 
 
+        <script>
+        const ingresosPorEspecialidad = <?php echo json_encode($ingresosPorEspecialidad); ?>;
+        const ingresosMensuales = <?php echo json_encode($ingresosMensuales); ?>;
+        console.log('Datos recibidos:');
+        console.log('ingresosMensuales:', ingresosMensuales);
+        console.log('ingresosPorEspecialidad:', ingresosPorEspecialidad);
+        </script>
         <script src="../../js/dashboard_admin.js"></script>
 </body>
 </html>
