@@ -61,11 +61,6 @@ if (!$receptionist) {
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Correo electrónico</label>
-                                    <input type="email" class="form-control" value="<?php echo $receptionist['CorreoElectronico']; ?>" readonly>
-                                </div>
-
-                                <div class="mb-3">
                                     <label class="form-label">Estado</label>
                                     <input type="text" class="form-control" value="<?php echo $receptionist['Activo'] ? 'Activo' : 'Inactivo'; ?>" readonly>
                                 </div>
@@ -76,12 +71,22 @@ if (!$receptionist) {
 
                                 <div class="mb-3">
                                     <label class="form-label">Nueva contraseña</label>
-                                    <input type="password" class="form-control" id="newPassword" placeholder="Ingresa la nueva contraseña">
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="newPassword" placeholder="Ingresa la nueva contraseña">
+                                        <button class="btn btn-outline-secondary" type="button" id="toggleNewPassword">
+                                            <i class="fa-solid fa-eye" id="iconNewPassword"></i>
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Confirmar contraseña</label>
-                                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirma la nueva contraseña">
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirma la nueva contraseña">
+                                        <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                                            <i class="fa-solid fa-eye" id="iconConfirmPassword"></i>
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <button id="updatePasswordBtn" class="btn-primary">
@@ -97,6 +102,31 @@ if (!$receptionist) {
     </div>
 
     <script>
+        // Toggle password visibility
+        $('#toggleNewPassword').on('click', function() {
+            const input = $('#newPassword');
+            const icon = $('#iconNewPassword');
+            if (input.attr('type') === 'password') {
+                input.attr('type', 'text');
+                icon.removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+                input.attr('type', 'password');
+                icon.removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        });
+
+        $('#toggleConfirmPassword').on('click', function() {
+            const input = $('#confirmPassword');
+            const icon = $('#iconConfirmPassword');
+            if (input.attr('type') === 'password') {
+                input.attr('type', 'text');
+                icon.removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+                input.attr('type', 'password');
+                icon.removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        });
+
         function showSystemResponse(type, message) {
             const container = $('<div>').addClass('system-response').addClass(type).text(message);
             $('#systemResponseContainer').append(container);

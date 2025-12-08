@@ -54,24 +54,22 @@ include '../../../config/connectDatabase.php';
         $stmt->execute();
         
         // Crear recepcionista automáticamente
-        $usuarioRecepcionista = 'recep_' . str_replace(' ', '_', strtolower($nombreCompleto));
+        $usuarioRecepcionista = 'recep_' . str_replace([' ', '.'], '_', strtolower($nombreCompleto));
         $passwordRecepcionista = bin2hex(random_bytes(8)); // Genera contraseña aleatoria de 16 caracteres
         $passwordRecepcionistaHash = password_hash($passwordRecepcionista, PASSWORD_DEFAULT);
-        $correoRecepcionista = 'recep_' . $correoElectronico;
         
         $sqlRecepcionista = "INSERT INTO Usuarios 
-            (Usuario, CorreoElectronico, ContrasenaHash, Rol, IdMedicoAsignado, PermisoPacientes, PermisoCitas, PermisoExpedientes, PermisoTarifas)
+            (Usuario, ContrasenaHash, Rol, IdMedico, Activo)
             VALUES 
-            (:usuario, :correo, :contrasena, 'receptionist', :idmedico, 1, 1, 0, 1)";
+            (:usuario, :contrasena, 'receptionist', :idmedico, 1)";
         
         $stmtRecep = $pdo->prepare($sqlRecepcionista);
         $stmtRecep->bindParam(':usuario', $usuarioRecepcionista);
-        $stmtRecep->bindParam(':correo', $correoRecepcionista);
         $stmtRecep->bindParam(':contrasena', $passwordRecepcionistaHash);
         $stmtRecep->bindParam(':idmedico', $idMedico);
         $stmtRecep->execute();
         
-        // Guardar la contraseña temporal en sesión para mostrarla al doctor
+        // Guardar la contraseña temporal en sesión para mostrarla al admin
         session_start();
         $_SESSION['temp_receptionist_password'] = $passwordRecepcionista;
         $_SESSION['temp_receptionist_user'] = $usuarioRecepcionista;

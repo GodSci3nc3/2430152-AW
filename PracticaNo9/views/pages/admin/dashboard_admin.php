@@ -22,9 +22,6 @@ $utilidad = $totalIngresos - $gastos['total'];
 $ingresosPorEspecialidad = getIngresosPorEspecialidad();
 $ingresosMensuales = getIngresosMensuales();
 
-// Debug: verificar datos
-error_log("Ingresos mensuales: " . json_encode($ingresosMensuales));
-
 ?>
 
 <!DOCTYPE html>
@@ -113,9 +110,6 @@ error_log("Ingresos mensuales: " . json_encode($ingresosMensuales));
         <script>
         const ingresosPorEspecialidad = <?php echo json_encode($ingresosPorEspecialidad); ?>;
         const ingresosMensuales = <?php echo json_encode($ingresosMensuales); ?>;
-        console.log('Datos recibidos:');
-        console.log('ingresosMensuales:', ingresosMensuales);
-        console.log('ingresosPorEspecialidad:', ingresosPorEspecialidad);
         </script>
         <script src="../../js/dashboard_admin.js"></script>
 </body>

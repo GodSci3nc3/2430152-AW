@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idMedico = $_SESSION['idMedico'];
     
     // Verificar que la recepcionista pertenece a este médico
-    $sql = "SELECT IdUsuario FROM Usuarios WHERE IdUsuario = :idUsuario AND IdMedicoAsignado = :idMedico";
+    $sql = "SELECT IdUsuario FROM Usuarios WHERE IdUsuario = :idUsuario AND IdMedico = :idMedico";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':idUsuario', $idUsuario);
     $stmt->bindParam(':idMedico', $idMedico);
