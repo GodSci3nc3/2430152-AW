@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = "INSERT INTO Bitacora (IdUsuario, Modulo, AccionRealizada, FechaAcceso)
             VALUES (:idUsuario, :modulo, :accion, NOW())";
     
-    $idUsuario = $_SESSION['idMedico'];
+    $idUsuario = $_SESSION['idUser'] ?? $_SESSION['idMedico'];
     $modulo = $_POST['modulo'];
     $accion = $_POST['accion'];
     
@@ -16,8 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bindParam(':modulo', $modulo);
     $stmt->bindParam(':accion', $accion);
     
-    $stmt->execute();
-    
-    echo json_encode(['success' => true]);
+    if ($stmt->execute()) {
+        $lastId = $pdo->lastInsertId();
+        echo json_encode(['success' => true, 'id' => $lastId]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Error al crear entrada']);
+    }
 }
 ?>

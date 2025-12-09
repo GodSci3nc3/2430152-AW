@@ -18,7 +18,8 @@ if ($isEdit) {
     require_once '../../../app/models/Agenda/getAgenda.php';
     $agenda = getAgendaById($_GET['id']);
     
-    if (!$agenda || $agenda['IdUsuario'] != $_SESSION['idMedico']) {
+    $userId = $_SESSION['idUser'] ?? $_SESSION['idMedico'];
+    if (!$agenda || $agenda['IdUsuario'] != $userId) {
         header('Location: agenda.php');
         exit();
     }
@@ -50,12 +51,12 @@ if ($isEdit) {
 
             <div class="col-md-9 p-4">
                 
-                <div id="systemResponseContainer"></div>
-
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h1 class="text-primary-title"><?php if ($isEdit) { echo 'Ver entrada de bitácora'; } else { echo 'Nueva entrada de bitácora'; } ?></h1>
                     <a href="agenda.php" class="btn-secondary"><i class="fa-solid fa-arrow-left"></i> Volver</a>
                 </div>
+
+                <div id="systemResponseContainer"></div>
 
                 <div class="row justify-content-center">
                     <div class="col-md-8">
@@ -170,7 +171,6 @@ if ($isEdit) {
                 error: function() {
                     showSystemResponse('error', 'Error al actualizar');
                 }
-            });
             });
             <?php endif; ?>
         });

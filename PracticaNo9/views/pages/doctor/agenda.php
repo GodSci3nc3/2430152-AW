@@ -39,8 +39,6 @@ if(!isset($_SESSION['username'])){
                 <div class="container-fluid p-5">
                     <h1 class="text-primary-title mb-4">Agenda médica - Bitácora de trabajo</h1>
 
-                    <div id="system-response" class="alert system-response-box"></div>
-
                     <div class="mb-4">
                         <a href="agendaDetails.php" class="btn-primary">
                             <i class="fa-solid fa-plus"></i> Nueva entrada
@@ -58,8 +56,9 @@ if(!isset($_SESSION['username'])){
                         </thead>
                         <tbody>
                         <?php
-                        require_once '../../../app/models/Agenda/getAgenda.php';
-                        $agendas = getAgendaByUser($_SESSION['idMedico']);
+                        require_once __DIR__ . '/../../../app/models/Agenda/getAgenda.php';
+                        $userId = $_SESSION['idUser'] ?? $_SESSION['idMedico'];
+                        $agendas = getAgendaByUser($userId);
                         
                         if (!empty($agendas)):
                             foreach($agendas as $agenda): 

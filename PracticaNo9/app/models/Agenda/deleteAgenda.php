@@ -4,7 +4,7 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
-    $idBitacora = $_POST['idBitacora'];
+    $idBitacora = $_POST['id'];
     
     // Verificar que el usuario es dueño de la bitácora
     $sqlCheck = "SELECT IdUsuario FROM Bitacora WHERE IdBitacora = :id";
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmtCheck->execute();
     $bitacora = $stmtCheck->fetch(PDO::FETCH_ASSOC);
     
-    if ($bitacora && $bitacora['IdUsuario'] == $_SESSION['idMedico']) {
+    if ($bitacora && $bitacora['IdUsuario'] == $_SESSION['idUser']) {
         $sql = "DELETE FROM Bitacora WHERE IdBitacora = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':id', $idBitacora);

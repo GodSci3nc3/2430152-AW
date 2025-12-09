@@ -94,7 +94,9 @@ checkPermission('citas');
             <?php
             require_once '../../../app/models/Appointments/getAppointments.php';
 
-            $appointments = getAppointments();
+            // Recepcionista solo ve citas de su médico asignado
+            $doctorId = ($_SESSION['rol'] === 'receptionist') ? $_SESSION['idMedico'] : null;
+            $appointments = getAppointments($doctorId);
 
             foreach($appointments as $appointment): ?>
                 <tr data-appointment-id="<?= $appointment['IdCita'] ?>">

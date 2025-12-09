@@ -4,7 +4,7 @@
     
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $sql = "SELECT Usuario, ContrasenaHash, Rol, IdMedico 
+        $sql = "SELECT IdUsuario, Usuario, ContrasenaHash, Rol, IdMedico 
                 FROM Usuarios WHERE Usuario = :username";
         $stmt = $pdo->prepare($sql);
 
@@ -15,6 +15,7 @@
         
         if($response){
             if(password_verify($password, $response['ContrasenaHash'])){
+                $_SESSION['idUser'] = $response['IdUsuario'];
                 $_SESSION['username'] = $response['Usuario'];
                 $_SESSION['rol'] = $response['Rol'];
                 $_SESSION['idMedico'] = $response['IdMedico'];

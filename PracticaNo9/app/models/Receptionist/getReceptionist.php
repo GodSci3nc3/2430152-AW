@@ -6,7 +6,7 @@ function getReceptionistByDoctor($idMedico) {
     
     $sql = "SELECT IdUsuario, Usuario, CorreoElectronico, Activo 
             FROM Usuarios 
-            WHERE IdMedico = :idMedico AND Rol = 'receptionist'
+            WHERE IdMedicoAsignado = :idMedico AND Rol = 'receptionist'
             LIMIT 1";
     
     $stmt = $pdo->prepare($sql);
